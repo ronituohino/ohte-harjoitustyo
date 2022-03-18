@@ -9,4 +9,4 @@ Tämä _repo_ on **kurssin** [Ohjelmistotekniikka](https://ohjelmistotekniikka-h
 
 ### Viikko 2
 
-...
+_tulossa..._

@@ -9,4 +9,5 @@ Tämä _repo_ on **kurssin** [Ohjelmistotekniikka](https://ohjelmistotekniikka-h
 
 ### Viikko 2
 
-_tulossa..._
+[vaatimusmaarittely.md](./harjoitustyö/dokumentaatio/vaatimusmaarittely.md)  
+[tyoaikakirjanpito.md](./harjoitustyö/dokumentaatio/tyoaikakirjanpito.md)

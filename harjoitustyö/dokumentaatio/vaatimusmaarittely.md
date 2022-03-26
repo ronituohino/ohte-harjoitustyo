@@ -14,7 +14,8 @@ Alkuvaiheessa sovelluksella on ainoastaan ennalta määritellyt lokaalit sudokut
 
 ## Käyttöliittymäluonnos
 
-...
+Sovellus koostuu alustavasti neljästä näkymästä. Myöhemmin saatetaan lisätä asetusnäkymä, erillinen tilastonäkymä, tulostaulu, Sudoku -työkalu, sekä pääkäyttäjän työkalut.  
+![Luonnos](./kuvat/luonnos.jpg)
 
 ## Perusversion tarjoama toiminnallisuus
 
@@ -35,8 +36,6 @@ Alkuvaiheessa sovelluksella on ainoastaan ennalta määritellyt lokaalit sudokut
 - [ ] Käyttäjän tilastoja kerätään Sudokuja pelatessa
   - Suoritetut Sudokut
   - Sudokujen suorittamiseen käytetty aika
-  - Suoritettujen Sudokujen määrä
-  - Suoritettujen Sudokujen vaikeustaso
 - [ ] Käyttäjä pystyy katsomaan omia tilastojaan
 - [ ] Käyttäjä pystyy kirjautumaan ulos
 
@@ -44,6 +43,10 @@ Alkuvaiheessa sovelluksella on ainoastaan ennalta määritellyt lokaalit sudokut
 
 Jos aikaa on vielä kätettävissä, perusversiota voidaan laajentaa seuraavilla ominaisuuksilla:
 
+- Erillinen tilastonäkymä
+  - Suoritettujen Sudokujen määrä
+  - Suoritettujen Sudokujen vaikeustaso
+- Sovelluksen asetuksien graafinen muuttaminen
 - Graafinen työkalu Sudokujen luomiseen
 - Verkkotietokanta, josta Sudokuja pystyy lataamaan
 - Graafinen tulostaulu kaikista kirjautuneista käyttäjistä

@@ -79,6 +79,7 @@ Normaaleille kaduille voi rakentaa korkeintaan 4 taloa tai yhden hotellin. Kadun
 			class Tili { }
 			class Ostettavaruutu { }
 			class Katuruutu {
+        nimi : string
 				rakennus_taso : int
 			}
 			class Asemaruutu { }

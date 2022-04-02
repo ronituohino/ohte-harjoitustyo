@@ -1,21 +1,39 @@
 import pygame
+from sudoku import Sudoku
 
+# Main init
 pygame.init()
 
-# Set up the drawing window
-screen = pygame.display.set_mode([500, 500])
-
+# Config
 running = True
+screen_dimensions = [1000, 600]
+
+# Set up the drawing window
+screen = pygame.display.set_mode(screen_dimensions, pygame.RESIZABLE)
+s = Sudoku("dots.sudoku")
+
+# More Pygame setup
+clock = pygame.time.Clock()
+pygame.display.set_caption("Sudoku")
+
 while running:
     # Window close button event
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_ESCAPE:
+                running = False
+        if event.type == pygame.VIDEORESIZE:
+            screen_dimensions[0] = event.w
+            screen_dimensions[1] = event.h
 
     screen.fill((255, 255, 255))
-    pygame.draw.circle(screen, (0, 0, 255), (250, 250), 75)
+
+    s.tick(screen, screen_dimensions)
 
     # Flip the display
     pygame.display.flip()
+    clock.tick(60)
 
 pygame.quit()

@@ -3,13 +3,15 @@ import pygame
 
 
 class Button():
-    def __init__(self, canvas, color, x, y, width, height, text, func, *args):
+    def __init__(self, canvas, color, x, y, width, height, text, outline, func, *args):
         self.color = color
         self.x = x
         self.y = y
         self.width = width
         self.height = height
         self.text = text
+        # Outline defined as ((r:int,g:int,b:int), thickness:int)
+        self.outline = outline
         self.func = func
         self.args = args
 
@@ -34,6 +36,10 @@ class Button():
         self.args = args
 
     def draw(self, screen):
+        if self.outline:
+            pygame.draw.rect(screen, self.outline[0], (self.x - self.outline[1], self.y - self.outline[1],
+                             self.width + self.outline[1] * 2, self.height + self.outline[1] * 2))
+
         pygame.draw.rect(screen, self.color, (self.x, self.y,
                          self.width, self.height), 0)
 

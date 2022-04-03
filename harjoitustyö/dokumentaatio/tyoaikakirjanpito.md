@@ -9,4 +9,5 @@
 | 2.4. | 0.5    | Kommentteja, asettelua, tyylittelyä, selection_value -valikko |
 | 3.4. | 1.5    | Sudokun ratkaisun tarkistus, peli on nyt pelattava, tyypitys, a_start.sudoku |
 | 3.4. | 0.5    | Sudoku -testit, coverage, invoke -kutsut |
-| yht | 8    ||
+| 3.4. | 0.5    | Dokumentaation ylläpito, README.md |
+| yht | 8.5    ||

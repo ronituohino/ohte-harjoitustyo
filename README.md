@@ -20,7 +20,7 @@ Varmista, että sinulla on asennettuna Poetry
 - Kloonaa tämä repo koneellesi
 - Avaa terminaali ja siirry kansioon `harjoitystyö/`
 - Asenna Poetry riippuvuudet komennolla `poetry install`
-- Käynnistä ohelma komennolla `poetry run invoke start`
+- Käynnistä ohjelma komennolla `poetry run invoke start`
 
 ## Komennot
 
@@ -38,5 +38,5 @@ Testikattavuuden voi generoida komennolla: `poetry run invoke coverage`
 Tämä generoi `.coverage` -tiedoston harjoitystyö -kansioon.
 
 Testikattavuudesta voi myös generoida HTML -tiedoston komennolla: `poetry run invoke coverage-report`  
-Tämä generoi `htmlcov` -kansion harjoitustyö -kansioon.  
+Tämä generoi kansion `htmlcov` harjoitustyö -kansioon.  
 Kattavuutta voi tarkastella avaamalla `htmlcov` -kansiosta tiedoston `index.html` selaimella.

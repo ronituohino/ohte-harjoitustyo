@@ -1,13 +1,42 @@
-## Ohjelmistotekniikka 2022
+# Sudoku
 
-Tämä _repo_ on **kurssin** [Ohjelmistotekniikka](https://ohjelmistotekniikka-hy.github.io/) harjoitustyö!
+Sovelluksella pystyy pelamaan hyvin tunnettua Sudoku -peliä paikallisesti. Sovellus on luotu Pythonilla Poetry-ympäristössä, ja se käyttää pygame -kirjastoa käyttöliittymän toteutuksessa.
 
-### Viikko 1
+Sovellus on toteutettu Python -versiolla `3.8` ja muilla Python -versioilla saattaa esiintyä ongelmia.
 
-[gitlog.txt](./laskarit/viikko1/gitlog.txt)  
-[komentorivi.txt](./laskarit/viikko1/komentorivi.txt)
+Tämä sovellus on kurssin [Ohjelmistotekniikka 2022](https://ohjelmistotekniikka-hy.github.io/) harjoitustyö.
 
-### Viikko 2
+## Dokumentaatio
 
-[vaatimusmaarittely.md](./harjoitustyö/dokumentaatio/vaatimusmaarittely.md)  
-[tyoaikakirjanpito.md](./harjoitustyö/dokumentaatio/tyoaikakirjanpito.md)
+- [Vaatimusmäärittely](./harjoitustyö/vaatimusmaarittely.md)
+- [Työaikakirjanpito](./harjoitustyö/tyoaikakirjanpito.md)
+- [Changelog](./harjoitustyö/changelog.md)
+
+## Asennus
+
+Varmista, että sinulla on asennettuna Python ja sen versio on `3.8` tai uudempi  
+Varmista, että sinulla on asennettuna Poetry
+
+- Kloonaa tämä repo koneellesi
+- Avaa terminaali ja siirry kansioon `harjoitystyö/`
+- Asenna Poetry riippuvuudet komennolla `poetry install`
+- Käynnistä ohelma komennolla `poetry run invoke start`
+
+## Komennot
+
+### Ohjelman käynnistäminen
+
+Ohjelman voi käynnistää komennolla: `poetry run invoke start`
+
+### Testaus
+
+Testit voi ajaa komennolla: `poetry run invoke test`
+
+### Testikattavuus
+
+Testikattavuuden voi generoida komennolla: `poetry run invoke coverage`  
+Tämä generoi `.coverage` -tiedoston harjoitystyö -kansioon.
+
+Testikattavuudesta voi myös generoida HTML -tiedoston komennolla: `poetry run invoke coverage-report`  
+Tämä generoi `htmlcov` -kansion harjoitustyö -kansioon.  
+Kattavuutta voi tarkastella avaamalla `htmlcov` -kansiosta tiedoston `index.html` selaimella.

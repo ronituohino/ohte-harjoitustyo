@@ -13,7 +13,8 @@ screen_dimensions = [1000, 600]
 
 # Set up the drawing window
 screen = pygame.display.set_mode(screen_dimensions, pygame.RESIZABLE)
-s = Sudoku("a_start.sudoku", canvas, screen_dimensions)
+s = Sudoku("a_start.sudoku")
+s.init_ui(canvas, screen_dimensions)
 
 # More Pygame setup
 clock = pygame.time.Clock()

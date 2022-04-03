@@ -22,7 +22,7 @@ Sovellus koostuu alustavasti neljästä näkymästä. Myöhemmin saatetaan lisä
 ### Ennen kirjautumista
 
 - [ ] Käyttäjä pystyy valitsemaan minkä Sudokun hän haluaa ratkaista
-- [ ] Käyttäjä pystyy pelaamaan Sudokua
+- [x] Käyttäjä pystyy pelaamaan Sudokua
   - Graafinen käyttöliittymä
   - Ohjelma osaa tarkistaa Sudokun
 - [ ] Käyttäjä pystyy luomaan käyttäjätunnuksen

@@ -8,9 +8,10 @@ Tämä sovellus on kurssin [Ohjelmistotekniikka 2022](https://ohjelmistotekniikk
 
 ## Dokumentaatio
 
-- [Vaatimusmäärittely](./harjoitustyö/vaatimusmaarittely.md)
-- [Työaikakirjanpito](./harjoitustyö/tyoaikakirjanpito.md)
-- [Changelog](./harjoitustyö/changelog.md)
+- [Vaatimusmäärittely](./harjoitustyö/dokumentaatio/vaatimusmaarittely.md)
+- [Arkkitehtuuri](./harjoitustyö/dokumentaatio/arkkitehtuuri.md)
+- [Työaikakirjanpito](./harjoitustyö/dokumentaatio/tyoaikakirjanpito.md)
+- [Changelog](./harjoitustyö/dokumentaatio/changelog.md)
 
 ## Asennus
 

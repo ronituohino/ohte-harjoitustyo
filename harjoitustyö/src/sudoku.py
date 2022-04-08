@@ -1,11 +1,12 @@
 import os
 import pygame
 from ui.button import Button
+from ui.view import View
 
 # Sudoku Game handler
 
 
-class Sudoku:
+class Sudoku(View):
     def __init__(self, name: str) -> None:
         # Read the .sudoku file
         string = ""

@@ -1,21 +1,17 @@
 import pygame
 from ui.canvas import Canvas
-from sudoku import Sudoku
-
 
 # Main init
 pygame.init()
-
-# Init UI canvas
-canvas = Canvas()
 
 # Config
 screen_dimensions = [1000, 600]
 
 # Set up the drawing window
 screen = pygame.display.set_mode(screen_dimensions, pygame.RESIZABLE)
-s = Sudoku("a_start.sudoku")
-s.init_ui(canvas, screen_dimensions)
+
+# Init UI canvas
+canvas = Canvas(screen, screen_dimensions)
 
 # More Pygame setup
 clock = pygame.time.Clock()
@@ -42,7 +38,8 @@ while RUNNING:
     # Background color
     screen.fill((255, 255, 255))
 
-    s.tick(screen, screen_dimensions)
+    # Call UI functions
+    canvas.tick(screen_dimensions)
 
     # Flip the display
     pygame.display.flip()

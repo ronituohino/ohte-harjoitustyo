@@ -1,6 +1,7 @@
 import pygame
+from ui.canvas import Canvas
 from sudoku import Sudoku
-from canvas import Canvas
+
 
 # Main init
 pygame.init()
@@ -19,17 +20,17 @@ s.init_ui(canvas, screen_dimensions)
 # More Pygame setup
 clock = pygame.time.Clock()
 pygame.display.set_caption("Sudoku")
-running = True
+RUNNING = True
 
-while running:
+while RUNNING:
     # Pygame event handling
     for event in pygame.event.get():
         # Quit events
         if event.type == pygame.QUIT:
-            running = False
+            RUNNING = False
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_ESCAPE:
-                running = False
+                RUNNING = False
         # Mouse events
         if event.type == pygame.MOUSEBUTTONDOWN:
             canvas.handle_click(event)

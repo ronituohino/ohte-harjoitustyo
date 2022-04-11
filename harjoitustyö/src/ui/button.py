@@ -67,7 +67,8 @@ class Button:
             )
 
         pygame.draw.rect(
-            self.canvas.screen, self.color, (self.x, self.y, self.width, self.height), 0
+            self.canvas.screen, self.color, (self.x,
+                                             self.y, self.width, self.height), 0
         )
 
         if self.text != "":

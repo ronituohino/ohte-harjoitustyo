@@ -13,7 +13,8 @@ screen_dimensions = [1000, 600]
 screen = pygame.display.set_mode(screen_dimensions, pygame.RESIZABLE)
 pygame.display.set_caption("Sudoku")
 
-game = Game(Canvas(screen, screen_dimensions), EventQueue(), pygame.time.Clock())
+game = Game(Canvas(screen, screen_dimensions),
+            EventQueue(), pygame.time.Clock())
 game.start_loop()
 
 pygame.quit()

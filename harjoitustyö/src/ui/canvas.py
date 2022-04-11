@@ -37,6 +37,6 @@ class Canvas:
                 if button.is_over(event.pos):
                     button.click()
 
-    def update_screen_dimensions(event):
+    def update_screen_dimensions(self, event):
         self.screen_dimensions[0] = event.w
         self.screen_dimensions[1] = event.h

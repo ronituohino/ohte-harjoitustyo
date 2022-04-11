@@ -52,3 +52,6 @@ class Game:
 
     def open_sudoku(self, name):
         self.set_service(Sudoku(name, self))
+
+    def open_menu(self):
+        self.set_service(Menu(self))

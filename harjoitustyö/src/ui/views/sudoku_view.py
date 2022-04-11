@@ -2,7 +2,7 @@ import os
 import pygame
 from ui.button import Button
 from ui.view import View
-
+from utils.resolution import get_font_size, get_lower_res
 from services.sudoku import Sudoku
 
 # Sudoku Game view
@@ -15,8 +15,9 @@ class SudokuView(View):
 
         # Init UI elements
         self.sudoku_buttons = [None] * (9 * 9)
-        smaller_dimension = min(canvas.screen_dimensions)
-        grid_size = smaller_dimension / 11
+        x_size, y_size = canvas.screen_dimensions
+        lower_res = get_lower_res(canvas.screen_dimensions)
+        grid_size = lower_res / 11
         for i in range(9):
             for j in range(9):
                 self.sudoku_buttons[i * 9 + j] = Button(
@@ -49,6 +50,19 @@ class SudokuView(View):
                 i + 1,
             )
 
+        self.exit_button = Button(
+            canvas,
+            (255, 0, 0),
+            x_size - lower_res * 0.1,
+            0,
+            lower_res * 0.1,
+            lower_res * 0.1,
+            "exit",
+            get_font_size(lower_res),
+            None,
+            self.sudoku.exit_to_menu,
+        )
+
     # Game UI functions
     # tick is called once per frame
 
@@ -56,13 +70,15 @@ class SudokuView(View):
         self.draw()
 
     def draw(self) -> None:
-        smaller_dimension = min(self.canvas.screen_dimensions)
-        grid_size = smaller_dimension / 11
+        x_size, y_size = self.canvas.screen_dimensions
+        lower_res = get_lower_res(self.canvas.screen_dimensions)
+        grid_size = lower_res / 11
 
         self.draw_sudoku_buttons(grid_size)
         self.draw_sudoku_grid(grid_size)
         self.draw_number_selection(grid_size)
         self.draw_success_message(grid_size)
+        self.draw_exit_button(lower_res, x_size)
 
     def draw_sudoku_buttons(self, grid_size):
         # Draw numbered squares
@@ -115,3 +131,8 @@ class SudokuView(View):
             font = pygame.font.SysFont("comicsans", int(grid_size))
             text = font.render("Congratulations!", 1, (0, 0, 0))
             self.canvas.screen.blit(text, (0, grid_size * 10))
+
+    def draw_exit_button(self, lower_res, x_size):
+        self.exit_button.update_size(lower_res * 0.1, lower_res * 0.1)
+        self.exit_button.update_position(x_size - lower_res * 0.1, 0)
+        self.exit_button.draw()

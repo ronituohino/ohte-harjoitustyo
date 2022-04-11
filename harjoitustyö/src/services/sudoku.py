@@ -42,8 +42,8 @@ class Sudoku:
         self.selection_value = value
 
     def check_sudoku(self) -> bool:
-        horizontal_rows = [self.grid[i * 9 : i * 9 + 9] for i in range(9)]
-        vertical_rows = [self.grid[i : 9 * 9 + i : 9] for i in range(9)]
+        horizontal_rows = [self.grid[i * 9: i * 9 + 9] for i in range(9)]
+        vertical_rows = [self.grid[i: 9 * 9 + i: 9] for i in range(9)]
 
         for row in horizontal_rows:
             if not self.check_row(row):
@@ -63,3 +63,6 @@ class Sudoku:
 
         # This returns False, if one of has_num is False
         return min(has_num)
+
+    def exit_to_menu(self):
+        self.game.open_menu()

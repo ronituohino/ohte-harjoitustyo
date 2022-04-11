@@ -3,7 +3,7 @@ from os.path import isfile, join
 import pygame
 from ui.view import View
 from ui.button import Button
-
+from utils.resolution import get_font_size, get_lower_res
 from services.menu import Menu
 
 
@@ -57,17 +57,40 @@ class MenuView(View):
         self.draw()
 
     def draw(self):
-        font = pygame.font.SysFont("comicsans", 40)
+        lower_res = get_lower_res(self.canvas.screen_dimensions)
+        font = pygame.font.SysFont("comicsans", get_font_size(lower_res))
+        x_size, y_size = self.canvas.screen_dimensions
 
         # Draw selectable sudokus
-        for i in range(self.menu.selected_sudoku - 1, self.menu.selected_sudoku + 2):
-            if i >= 0 and i < self.menu.sudoku_amount:
-                text = font.render(self.menu.sudokus[i], 1, (0, 0, 0))
-                self.canvas.screen.blit(text, (0, 100 * i))
+        for i in range(-1, 2):
+            rendered_sudoku = self.menu.selected_sudoku + i
+            if rendered_sudoku >= 0 and rendered_sudoku < self.menu.sudoku_amount:
+                text = font.render(
+                    self.menu.sudokus[rendered_sudoku], 1, (0, 0, 0))
+                self.canvas.screen.blit(
+                    text,
+                    (
+                        int(
+                            x_size * 0.5 + x_size * 0.33 *
+                            (i) - text.get_size()[0] / 2
+                        ),
+                        int(y_size * 0.2),
+                    ),
+                )
 
         # Draw left/right buttons
-        for button in self.move_buttons:
+        for i in range(2):
+            button = self.move_buttons[i]
+            button.update_size(lower_res * 0.2, lower_res * 0.1)
+            if i == 0:
+                button.update_position(0, y_size / 2)
+            if i == 1:
+                button.update_position(x_size - lower_res * 0.2, y_size / 2)
             button.draw()
 
         # Draw open Sudoku button
+        self.open_button.update_size(lower_res * 0.1, lower_res * 0.1)
+        self.open_button.update_position(
+            x_size / 2 - lower_res * 0.05, y_size / 2 - lower_res * 0.05
+        )
         self.open_button.draw()

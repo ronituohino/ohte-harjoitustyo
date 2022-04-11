@@ -1,4 +1,5 @@
-from views.menu import Menu
+from ui.views.menu_view import MenuView
+from ui.views.sudoku_view import SudokuView
 
 # Game canvas, handles UI elements
 
@@ -6,12 +7,14 @@ from views.menu import Menu
 class Canvas:
     def __init__(self, screen, screen_dimensions):
         self.screen = screen
+        self.screen_dimensions = screen_dimensions
         self.buttons = []
-        menu = Menu()
-        menu.init_ui(self, screen_dimensions)
-        self.current_view = menu
+
+        menu_view = MenuView(self)
+        self.current_view = menu_view
 
     def tick(self, screen_dimensions):
+        self.screen_dimensions = screen_dimensions
         self.current_view.tick(self.screen, screen_dimensions)
 
     def add_button(self, button: "Button"):

@@ -3,8 +3,21 @@ import pygame
 # General button class to be used with Canvas UI
 
 
-class Button():
-    def __init__(self, canvas: "Canvas", color, x: int, y: int, width: int, height: int, text: str, font_size: int, outline: tuple, func, *args) -> None:
+class Button:
+    def __init__(
+        self,
+        canvas: "Canvas",
+        color,
+        x: int,
+        y: int,
+        width: int,
+        height: int,
+        text: str,
+        font_size: int,
+        outline: tuple,
+        func,
+        *args
+    ) -> None:
         self.color = color
         self.x = x
         self.y = y
@@ -40,19 +53,33 @@ class Button():
     def update_args(self, *args) -> None:
         self.args = args
 
-    def draw(self, screen) -> None:
+    def draw(self) -> None:
         if self.outline:
-            pygame.draw.rect(screen, self.outline[0], (self.x - self.outline[1], self.y - self.outline[1],
-                             self.width + self.outline[1] * 2, self.height + self.outline[1] * 2))
+            pygame.draw.rect(
+                self.canvas.screen,
+                self.outline[0],
+                (
+                    self.x - self.outline[1],
+                    self.y - self.outline[1],
+                    self.width + self.outline[1] * 2,
+                    self.height + self.outline[1] * 2,
+                ),
+            )
 
-        pygame.draw.rect(screen, self.color, (self.x, self.y,
-                         self.width, self.height), 0)
+        pygame.draw.rect(
+            self.canvas.screen, self.color, (self.x, self.y, self.width, self.height), 0
+        )
 
-        if self.text != '':
-            font = pygame.font.SysFont('comicsans', self.font_size)
+        if self.text != "":
+            font = pygame.font.SysFont("comicsans", self.font_size)
             text = font.render(self.text, 1, (0, 0, 0))
-            screen.blit(text, (self.x + (self.width/2 - text.get_width()/2),
-                               self.y + (self.height/2 - text.get_height()/2)))
+            self.canvas.screen.blit(
+                text,
+                (
+                    self.x + (self.width / 2 - text.get_width() / 2),
+                    self.y + (self.height / 2 - text.get_height() / 2),
+                ),
+            )
 
     def is_over(self, pos: tuple) -> bool:
         if pos[0] > self.x and pos[0] < self.x + self.width:

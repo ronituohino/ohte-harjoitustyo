@@ -9,8 +9,9 @@ from services.sudoku import Sudoku
 
 
 class SudokuView(View):
-    def __init__(self, canvas: "Canvas", name: str) -> None:
-        self.sudoku = Sudoku(name)
+    def __init__(self, canvas: "Canvas", sudoku) -> None:
+        self.canvas = canvas
+        self.sudoku = sudoku
 
         # Init UI elements
         self.sudoku_buttons = [None] * (9 * 9)
@@ -51,19 +52,19 @@ class SudokuView(View):
     # Game UI functions
     # tick is called once per frame
 
-    def tick(self, screen, screen_dimensions: list) -> None:
-        self.draw(screen, screen_dimensions)
+    def tick(self) -> None:
+        self.draw()
 
-    def draw(self, screen, screen_dimensions: list) -> None:
-        smaller_dimension = min(screen_dimensions)
+    def draw(self) -> None:
+        smaller_dimension = min(self.canvas.screen_dimensions)
         grid_size = smaller_dimension / 11
 
-        self.draw_sudoku_buttons(screen, grid_size)
-        self.draw_sudoku_grid(screen, grid_size)
-        self.draw_number_selection(screen, grid_size)
-        self.draw_success_message(screen, grid_size)
+        self.draw_sudoku_buttons(grid_size)
+        self.draw_sudoku_grid(grid_size)
+        self.draw_number_selection(grid_size)
+        self.draw_success_message(grid_size)
 
-    def draw_sudoku_buttons(self, screen, grid_size):
+    def draw_sudoku_buttons(self, grid_size):
         # Draw numbered squares
         for i in range(9):
             for j in range(9):
@@ -74,9 +75,9 @@ class SudokuView(View):
                 button.update_size(grid_size + 1, grid_size + 1)
                 button.update_font_size(int(grid_size))
                 if value > 0:
-                    button.draw(screen)
+                    button.draw()
 
-    def draw_sudoku_grid(self, screen, grid_size):
+    def draw_sudoku_grid(self, grid_size):
         # Draw lines horizontally and vertically to form grid
         for i in range(10):
             # Varying thickness
@@ -86,31 +87,31 @@ class SudokuView(View):
                 thickness = 1
 
             pygame.draw.line(
-                screen,
+                self.canvas.screen,
                 (0, 0, 0),
                 (0, i * grid_size),
                 (grid_size * 9, i * grid_size),
                 thickness,
             )
             pygame.draw.line(
-                screen,
+                self.canvas.screen,
                 (0, 0, 0),
                 (i * grid_size, 0),
                 (i * grid_size, grid_size * 9),
                 thickness,
             )
 
-    def draw_number_selection(self, screen, grid_size):
+    def draw_number_selection(self, grid_size):
         # Draw number selection buttons
         for i in range(9):
             button = self.number_buttons[i]
             button.update_position(10 * grid_size, i * grid_size)
             button.update_size(grid_size, grid_size)
             button.update_font_size(int(grid_size))
-            button.draw(screen)
+            button.draw()
 
-    def draw_success_message(self, screen, grid_size):
+    def draw_success_message(self, grid_size):
         if self.sudoku.solved:
             font = pygame.font.SysFont("comicsans", int(grid_size))
             text = font.render("Congratulations!", 1, (0, 0, 0))
-            screen.blit(text, (0, grid_size * 10))
+            self.canvas.screen.blit(text, (0, grid_size * 10))

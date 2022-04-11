@@ -4,7 +4,9 @@ import os
 
 
 class Sudoku:
-    def __init__(self, name: str) -> None:
+    def __init__(self, name: str, game) -> None:
+        self.game = game
+
         # Read the .sudoku file
         string = ""
         cwd = os.getcwd()
@@ -24,6 +26,9 @@ class Sudoku:
         self.grid = [int(c) for c in string]
         self.selection_value = 1
         self.solved = False
+
+    def __name__(self):
+        return "Sudoku"
 
     # Set value in sudoku board to selection_value
     def set_value(self, coords: tuple) -> None:

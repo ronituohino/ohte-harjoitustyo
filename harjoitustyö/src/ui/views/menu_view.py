@@ -8,8 +8,9 @@ from services.menu import Menu
 
 
 class MenuView(View):
-    def __init__(self, canvas: "Canvas"):
-        self.menu = Menu()
+    def __init__(self, canvas: "Canvas", menu):
+        self.canvas = canvas
+        self.menu = menu
 
         # UI
         self.move_buttons = [
@@ -39,19 +40,34 @@ class MenuView(View):
             ),
         ]
 
-    def tick(self, screen, screen_dimensions):
-        self.draw(screen, screen_dimensions)
+        self.open_button = Button(
+            canvas,
+            (255, 0, 0),
+            0,
+            0,
+            100,
+            50,
+            "open",
+            20,
+            None,
+            self.menu.open_sudoku,
+        )
 
-    def draw(self, screen, screen_dimensions):
-        print(self.menu.selected_sudoku)
+    def tick(self):
+        self.draw()
+
+    def draw(self):
         font = pygame.font.SysFont("comicsans", 40)
 
         # Draw selectable sudokus
         for i in range(self.menu.selected_sudoku - 1, self.menu.selected_sudoku + 2):
             if i >= 0 and i < self.menu.sudoku_amount:
                 text = font.render(self.menu.sudokus[i], 1, (0, 0, 0))
-                screen.blit(text, (0, 100 * i))
+                self.canvas.screen.blit(text, (0, 100 * i))
 
         # Draw left/right buttons
         for button in self.move_buttons:
-            button.draw(screen)
+            button.draw()
+
+        # Draw open Sudoku button
+        self.open_button.draw()

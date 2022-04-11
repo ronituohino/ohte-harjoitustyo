@@ -10,12 +10,20 @@ class Canvas:
         self.screen_dimensions = screen_dimensions
         self.buttons = []
 
-        menu_view = MenuView(self)
-        self.current_view = menu_view
+        self.service_view = None
 
-    def tick(self, screen_dimensions):
-        self.screen_dimensions = screen_dimensions
-        self.current_view.tick(self.screen, screen_dimensions)
+    def set_service(self, service):
+        # Service has changed, update view
+        # First remove old view's ui elements (buttons)
+        self.buttons = []
+        name = service.__name__()
+        if name == "Menu":
+            self.service_view = MenuView(self, service)
+        elif name == "Sudoku":
+            self.service_view = SudokuView(self, service)
+
+    def tick(self):
+        self.service_view.tick()
 
     def add_button(self, button: "Button"):
         self.buttons.append(button)
@@ -28,3 +36,7 @@ class Canvas:
             for button in self.buttons:
                 if button.is_over(event.pos):
                     button.click()
+
+    def update_screen_dimensions(event):
+        self.screen_dimensions[0] = event.w
+        self.screen_dimensions[1] = event.h

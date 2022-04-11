@@ -15,8 +15,8 @@ Tämä sovellus on kurssin [Ohjelmistotekniikka 2022](https://ohjelmistotekniikk
 
 ## Asennus
 
-Varmista, että sinulla on asennettuna Python ja sen versio on `3.8` tai uudempi  
-Varmista, että sinulla on asennettuna Poetry
+Varmista, että sinulla on asennettuna Python ja sen versio on `3.8` tai uudempi.  
+Varmista, että sinulla on asennettuna Poetry.  
 
 - Kloonaa tämä repo koneellesi
 - Avaa terminaali ja siirry kansioon `harjoitystyö/`
@@ -32,10 +32,10 @@ Ohjelman voi käynnistää komennolla: `poetry run invoke start`
 ### Linttaus & formatointi
 
 Ohjelman voi ajaa Pylintin läpi komennolla: `poetry run invoke lint`  
-Tämä antaa arvion koodin laadusta
+Tämä antaa arvion koodin laadusta.
 
 Ohjelman koodin voi formatoida autopep8 avulla komennolla: `poetry run invoke format`  
-Tämä ajaa koodin autopep8 formatointiohjelman läpi, kommennosta ei ole tulostetta
+Tämä ajaa koodin autopep8 formatointiohjelman läpi, kommennosta ei ole tulostetta.
 
 ### Testaus
 

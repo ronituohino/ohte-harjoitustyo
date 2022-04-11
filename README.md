@@ -31,10 +31,10 @@ Ohjelman voi käynnistää komennolla: `poetry run invoke start`
 
 ### Linttaus & formatointi
 
-Ohjelman voi ajaa Pylintin läpi komennolla: `poetry run invoke lint`
+Ohjelman voi ajaa Pylintin läpi komennolla: `poetry run invoke lint`  
 Tämä antaa arvion koodin laadusta
 
-Ohjelman koodin voi formatoida autopep8 avulla komennolla: `poetry run invoke format`
+Ohjelman koodin voi formatoida autopep8 avulla komennolla: `poetry run invoke format`  
 Tämä ajaa koodin autopep8 formatointiohjelman läpi, kommennosta ei ole tulostetta
 
 ### Testaus

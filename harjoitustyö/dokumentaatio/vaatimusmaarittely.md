@@ -6,7 +6,7 @@ Sovellukella käyttäjä pystyy pelamaan tunnettua Sudoku -peliä tietokoneellaa
 
 ## Käyttäjät
 
-Alkuvaiheessa sovelluksella on kaksi käyttäjäroolia eli *vieraileva* ja *normaali* käyttäjä. Vieraileva käyttäjä pystyy pelaamaan Sudokua, mutta hänen tilastojaan ei tallennetta. Myöhemmin sovellukseen saatetaan lisätä suurempien oikeuksien omaava *pääkäyttäjä*.
+Alkuvaiheessa sovelluksella on kaksi käyttäjäroolia eli _vieraileva_ ja _normaali_ käyttäjä. Vieraileva käyttäjä pystyy pelaamaan Sudokua, mutta hänen tilastojaan ei tallennetta. Myöhemmin sovellukseen saatetaan lisätä suurempien oikeuksien omaava _pääkäyttäjä_.
 
 ## Sudokut
 
@@ -21,7 +21,7 @@ Sovellus koostuu alustavasti neljästä näkymästä. Myöhemmin saatetaan lisä
 
 ### Ennen kirjautumista
 
-- [ ] Käyttäjä pystyy valitsemaan minkä Sudokun hän haluaa ratkaista
+- [x] Käyttäjä pystyy valitsemaan minkä Sudokun hän haluaa ratkaista
 - [x] Käyttäjä pystyy pelaamaan Sudokua
   - Graafinen käyttöliittymä
   - Ohjelma osaa tarkistaa Sudokun
@@ -30,7 +30,7 @@ Sovellus koostuu alustavasti neljästä näkymästä. Myöhemmin saatetaan lisä
   - Käyttäjätunnuksen täytyy olla uniikki, ja sisältää ainakin kaksi merkkiä
 - [ ] Käyttäjä pystyy kirjautumaan järjestelmään
   - Kirjautuminen onnistuu syöttämällä olemassa olevan käyttäjätunnus/salasana -yhdistelmän kirjautumislomakkeelle
-  
+
 ### Kirjautumisen jälkeen
 
 - [ ] Käyttäjän tilastoja kerätään Sudokuja pelatessa

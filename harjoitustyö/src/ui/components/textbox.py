@@ -1,8 +1,7 @@
 import pygame
-from ui.components.elements.element import Element
 
 
-class Textbox(Element):
+class Textbox:
     def __init__(
         self,
         canvas: "Canvas",
@@ -11,8 +10,12 @@ class Textbox(Element):
         y: int,
         width: int,
         height: int,
+        placeholder: "",
+        placeholder_color: tuple,
         font_size: int,
         outline: tuple,
+        validation_func,
+        update_func,
     ):
         super().__init__()
         self.color = color
@@ -20,12 +23,18 @@ class Textbox(Element):
         self.y = y
         self.width = width
         self.height = height
+        self.placeholder = placeholder
+        self.placeholder_color = placeholder_color
         self.font_size = font_size
         # Outline defined as ((r:int,g:int,b:int), thickness:int)
         self.outline = outline
+        self.validation_func = validation_func
+        self.update_func = update_func
 
         self.canvas = canvas
         self.canvas.add_textbox(self)
+        self.value = None
+        self.errors = []
         self.focus = False
 
     def is_over(self, pos: tuple) -> bool:
@@ -45,6 +54,7 @@ class Textbox(Element):
             self.value += char
         else:
             self.value = char
+        self.update()
 
     def delete_char(self):
         if self.value:
@@ -52,8 +62,17 @@ class Textbox(Element):
                 self.value = self.value[:-1]
             else:
                 self.value = None
+            self.update()
+
+    def update(self):
+        self.validate()
+        self.update_func(self.value)
+
+    def validate(self):
+        self.errors = self.validation_func(self.value)
 
     def draw(self):
+        # Outline
         if self.outline:
             pygame.draw.rect(
                 self.canvas.screen,
@@ -66,17 +85,32 @@ class Textbox(Element):
                 ),
             )
 
+        # Main rect
         pygame.draw.rect(
             self.canvas.screen, self.color, (self.x, self.y, self.width, self.height), 0
         )
 
-        if self.value and len(self.value) > 0:
-            font = pygame.font.SysFont("comicsans", self.font_size)
+        # Text in rect (value / placeholder)
+        font = pygame.font.SysFont("comicsans", self.font_size)
+        if self.value:
             text = font.render(self.value, 1, (0, 0, 0))
+        else:
+            text = font.render(self.placeholder, 1, self.placeholder_color)
+        self.canvas.screen.blit(
+            text,
+            (
+                self.x + (self.width / 2 - text.get_width() / 2),
+                self.y + (self.height / 2 - text.get_height() / 2),
+            ),
+        )
+
+        # Error message
+        if len(self.errors) > 0:
+            text = font.render(self.errors[0], 1, (200, 0, 0))
             self.canvas.screen.blit(
                 text,
                 (
                     self.x + (self.width / 2 - text.get_width() / 2),
-                    self.y + (self.height / 2 - text.get_height() / 2),
+                    self.y + (self.height / 2 - text.get_height() / 2) + self.height,
                 ),
             )

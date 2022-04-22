@@ -1,7 +1,6 @@
 from ui.view import View
 from ui.components.button import Button
-from ui.components.form import Form
-from ui.components.elements.textbox import Textbox
+from ui.components.textbox import Textbox
 
 
 class LoginView(View):
@@ -13,22 +12,49 @@ class LoginView(View):
             canvas, (255, 0, 0), 0, 0, 100, 50, "back", 20, None, login.open_menu
         )
 
-        self.login_button = Button(
-            canvas, (0, 255, 0), 0, 0, 100, 50, "login", 20, None, None
-        )
-
         self.register_button = Button(
             canvas, (255, 0, 0), 0, 0, 100, 50, "new user?", 20, None, None
         )
 
         self.username_textbox = Textbox(
-            canvas, (245, 245, 245), 0, 0, 200, 50, 20, ((0, 0, 0), 3)
+            canvas,
+            (245, 245, 245),
+            0,
+            0,
+            200,
+            50,
+            "Username",
+            (200, 200, 200),
+            30,
+            ((0, 0, 0), 3),
+            login.username_validation,
+            self.set_username,
         )
 
-        self.login_form = Form()
-        self.login_form.attach_element(
-            "username", self.username_textbox, self.username_validation
+        self.password_textbox = Textbox(
+            canvas,
+            (245, 245, 245),
+            0,
+            200,
+            200,
+            50,
+            "Password",
+            (200, 200, 200),
+            30,
+            ((0, 0, 0), 3),
+            login.password_validation,
+            self.set_password,
         )
+
+        self.login_button = Button(
+            canvas, (0, 255, 0), 0, 300, 100, 50, "login", 20, None, login.login
+        )
+
+    def set_username(self, username):
+        self.login.username = username
+
+    def set_password(self, password):
+        self.login.password = password
 
     def tick(self):
         self.draw()
@@ -38,6 +64,8 @@ class LoginView(View):
 
         # Draw login form
         self.username_textbox.draw()
+        self.password_textbox.draw()
+        self.login_button.draw()
 
         # Draw exit button
         self.exit_button.update_size(
@@ -48,6 +76,3 @@ class LoginView(View):
             x_size - self.canvas.lower_screen_dimension * 0.1, 0
         )
         self.exit_button.draw()
-
-    def username_validation(self, username):
-        return len(username) >= 2

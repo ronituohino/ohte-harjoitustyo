@@ -32,8 +32,12 @@ class Game:
             if event.type == pygame.QUIT:
                 return False
             if event.type == pygame.KEYDOWN:
+                # Quit with ESC key
                 if event.key == pygame.K_ESCAPE:
                     return False
+                # Text input
+                else:
+                    self.canvas.handle_text_input(event)
             # Mouse events
             if event.type == pygame.MOUSEBUTTONDOWN:
                 self.canvas.handle_click(event)

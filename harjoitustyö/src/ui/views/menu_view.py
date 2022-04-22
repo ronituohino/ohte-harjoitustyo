@@ -2,7 +2,7 @@ import os
 from os.path import isfile, join
 import pygame
 from ui.view import View
-from ui.button import Button
+from ui.components.button import Button
 from services.menu import Menu
 
 

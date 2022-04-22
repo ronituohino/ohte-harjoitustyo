@@ -67,8 +67,7 @@ class Button:
             )
 
         pygame.draw.rect(
-            self.canvas.screen, self.color, (self.x,
-                                             self.y, self.width, self.height), 0
+            self.canvas.screen, self.color, (self.x, self.y, self.width, self.height), 0
         )
 
         if self.text != "":
@@ -86,7 +85,6 @@ class Button:
         if pos[0] > self.x and pos[0] < self.x + self.width:
             if pos[1] > self.y and pos[1] < self.y + self.height:
                 return True
-
         return False
 
     def click(self) -> None:

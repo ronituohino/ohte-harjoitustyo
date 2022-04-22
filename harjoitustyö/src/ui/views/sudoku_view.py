@@ -1,6 +1,6 @@
 import os
 import pygame
-from ui.button import Button
+from ui.components.button import Button
 from ui.view import View
 from services.sudoku import Sudoku
 

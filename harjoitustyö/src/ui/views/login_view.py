@@ -1,6 +1,7 @@
 from ui.view import View
 from ui.components.button import Button
 from ui.components.textbox import Textbox
+from ui.components.form import Form
 
 
 class LoginView(View):
@@ -13,11 +14,24 @@ class LoginView(View):
         )
 
         self.register_button = Button(
-            canvas, (255, 0, 0), 0, 0, 100, 50, "new user?", 20, None, None
+            canvas,
+            (255, 0, 0),
+            0,
+            0,
+            100,
+            50,
+            "new user?",
+            20,
+            None,
+            login.open_register,
         )
+
+        self.login_form = Form(login.validate)
 
         self.username_textbox = Textbox(
             canvas,
+            self.login_form,
+            "username",
             (245, 245, 245),
             0,
             0,
@@ -27,12 +41,13 @@ class LoginView(View):
             (200, 200, 200),
             30,
             ((0, 0, 0), 3),
-            login.username_validation,
             self.set_username,
         )
 
         self.password_textbox = Textbox(
             canvas,
+            self.login_form,
+            "password",
             (245, 245, 245),
             0,
             200,
@@ -42,9 +57,11 @@ class LoginView(View):
             (200, 200, 200),
             30,
             ((0, 0, 0), 3),
-            login.password_validation,
             self.set_password,
         )
+
+        self.login_form.attach_textbox(self.username_textbox)
+        self.login_form.attach_textbox(self.password_textbox)
 
         self.login_button = Button(
             canvas, (0, 255, 0), 0, 300, 100, 50, "login", 20, None, login.login
@@ -66,6 +83,7 @@ class LoginView(View):
         self.username_textbox.draw()
         self.password_textbox.draw()
         self.login_button.draw()
+        self.register_button.draw()
 
         # Draw exit button
         self.exit_button.update_size(

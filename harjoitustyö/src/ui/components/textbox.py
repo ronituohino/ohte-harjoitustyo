@@ -5,19 +5,20 @@ class Textbox:
     def __init__(
         self,
         canvas: "Canvas",
+        form: "Form",
+        name: str,
         color: tuple,
         x: int,
         y: int,
         width: int,
         height: int,
-        placeholder: "",
+        placeholder: str,
         placeholder_color: tuple,
         font_size: int,
         outline: tuple,
-        validation_func,
         update_func,
     ):
-        super().__init__()
+        self.name = name
         self.color = color
         self.x = x
         self.y = y
@@ -28,13 +29,13 @@ class Textbox:
         self.font_size = font_size
         # Outline defined as ((r:int,g:int,b:int), thickness:int)
         self.outline = outline
-        self.validation_func = validation_func
         self.update_func = update_func
 
         self.canvas = canvas
+        self.form = form
         self.canvas.add_textbox(self)
         self.value = None
-        self.errors = []
+        self.errors = None
         self.focus = False
 
     def is_over(self, pos: tuple) -> bool:
@@ -65,11 +66,11 @@ class Textbox:
             self.update()
 
     def update(self):
-        self.validate()
         self.update_func(self.value)
+        self.form.validate()
 
-    def validate(self):
-        self.errors = self.validation_func(self.value)
+    def set_errors(self, errors):
+        self.errors = errors
 
     def draw(self):
         # Outline
@@ -105,7 +106,7 @@ class Textbox:
         )
 
         # Error message
-        if len(self.errors) > 0:
+        if self.errors and len(self.errors) > 0:
             text = font.render(self.errors[0], 1, (200, 0, 0))
             self.canvas.screen.blit(
                 text,

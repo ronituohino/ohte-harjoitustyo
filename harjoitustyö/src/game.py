@@ -1,6 +1,8 @@
 import pygame
 from services.menu import Menu
 from services.sudoku import Sudoku
+from services.login import Login
+from services.register import Register
 
 
 class Game:
@@ -55,3 +57,9 @@ class Game:
 
     def open_menu(self):
         self.set_service(Menu(self))
+
+    def open_login(self):
+        self.set_service(Login(self))
+
+    def open_register(self):
+        self.set_service(Register(self))

@@ -26,3 +26,6 @@ class Menu:
 
     def open_sudoku(self):
         self.game.open_sudoku(self.sudokus[self.selected_sudoku])
+
+    def open_login(self):
+        self.game.open_login()

@@ -3,6 +3,7 @@ from os.path import isfile, join
 import pygame
 from ui.view import View
 from ui.components.button import Button
+from ui.components.text import render, blit
 from services.menu import Menu
 
 
@@ -21,7 +22,6 @@ class MenuView(View):
                 100,
                 50,
                 "left",
-                20,
                 None,
                 self.menu.move_left,
             ),
@@ -33,7 +33,6 @@ class MenuView(View):
                 100,
                 50,
                 "right",
-                20,
                 None,
                 self.menu.move_right,
             ),
@@ -47,35 +46,32 @@ class MenuView(View):
             100,
             50,
             "open",
-            20,
             None,
             self.menu.open_sudoku,
         )
 
         self.login_button = Button(
-            canvas, (0, 0, 255), 0, 0, 100, 50, "login", 20, None, self.menu.open_login
+            canvas, (0, 0, 255), 0, 0, 100, 50, "login", None, self.menu.open_login
         )
 
     def tick(self):
         self.draw()
 
     def draw(self):
-        font = pygame.font.SysFont("comicsans", self.canvas.font_size)
         x_size, y_size = self.canvas.screen_dimensions
 
         # Draw selectable sudokus
         for i in range(-1, 2):
             rendered_sudoku = self.menu.selected_sudoku + i
             if rendered_sudoku >= 0 and rendered_sudoku < self.menu.sudoku_amount:
-                text = font.render(self.menu.sudokus[rendered_sudoku], 1, (0, 0, 0))
-                self.canvas.screen.blit(
-                    text,
-                    (
-                        int(
-                            x_size * 0.5 + x_size * 0.33 * (i) - text.get_size()[0] / 2
-                        ),
-                        int(y_size * 0.2),
-                    ),
+                ren = render(
+                    self.menu.sudokus[rendered_sudoku], (0, 0, 0), self.canvas.font_size
+                )
+                blit(
+                    self.canvas,
+                    x_size * 0.5 + x_size * 0.33 * (i) - ren.get_size()[0] / 2,
+                    y_size * 0.2,
+                    ren,
                 )
 
         # Draw left/right buttons

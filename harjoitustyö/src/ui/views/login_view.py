@@ -2,6 +2,7 @@ from ui.view import View
 from ui.components.button import Button
 from ui.components.textbox import Textbox
 from ui.components.form import Form
+from ui.components.text import text
 
 
 class LoginView(View):
@@ -10,19 +11,18 @@ class LoginView(View):
         self.login = login
 
         self.exit_button = Button(
-            canvas, (255, 0, 0), 0, 0, 100, 50, "back", 20, None, login.open_menu
+            canvas, (255, 0, 0), 0, 0, 100, 50, "X", ((0, 0, 0), 3), login.open_menu
         )
 
-        self.register_button = Button(
+        self.to_register_button = Button(
             canvas,
             (255, 0, 0),
             0,
             0,
             100,
             50,
-            "new user?",
-            20,
-            None,
+            "New user?",
+            ((0, 0, 0), 3),
             login.open_register,
         )
 
@@ -37,9 +37,9 @@ class LoginView(View):
             0,
             200,
             50,
+            14,
             "Username",
             (200, 200, 200),
-            30,
             ((0, 0, 0), 3),
             self.set_username,
         )
@@ -53,9 +53,9 @@ class LoginView(View):
             200,
             200,
             50,
+            None,
             "Password",
             (200, 200, 200),
-            30,
             ((0, 0, 0), 3),
             self.set_password,
         )
@@ -64,7 +64,15 @@ class LoginView(View):
         self.login_form.attach_textbox(self.password_textbox)
 
         self.login_button = Button(
-            canvas, (0, 255, 0), 0, 300, 100, 50, "login", 20, None, login.login
+            canvas,
+            (0, 255, 0),
+            0,
+            300,
+            100,
+            50,
+            "Login",
+            ((0, 0, 0), 3),
+            login.login,
         )
 
     def set_username(self, username):
@@ -80,10 +88,50 @@ class LoginView(View):
         x_size, y_size = self.canvas.screen_dimensions
 
         # Draw login form
+        text(
+            self.canvas,
+            "Login",
+            x_size / 2 - self.username_textbox.width / 2,
+            y_size * 0.075,
+            (0, 0, 0),
+            self.canvas.font_size,
+        )
+
+        self.username_textbox.update_size(
+            self.canvas.lower_screen_dimension * 0.4,
+            self.canvas.lower_screen_dimension * 0.1,
+        )
+        self.username_textbox.update_position(
+            x_size / 2 - self.username_textbox.width / 2, y_size * 0.15
+        )
         self.username_textbox.draw()
+
+        self.password_textbox.update_size(
+            self.canvas.lower_screen_dimension * 0.4,
+            self.canvas.lower_screen_dimension * 0.1,
+        )
+        self.password_textbox.update_position(
+            x_size / 2 - self.password_textbox.width / 2, y_size * 0.3
+        )
         self.password_textbox.draw()
+
+        self.login_button.update_size(
+            self.canvas.lower_screen_dimension * 0.4,
+            self.canvas.lower_screen_dimension * 0.1,
+        )
+        self.login_button.update_position(
+            x_size / 2 - self.login_button.width / 2, y_size * 0.45
+        )
         self.login_button.draw()
-        self.register_button.draw()
+
+        self.to_register_button.update_size(
+            self.canvas.lower_screen_dimension * 0.4,
+            self.canvas.lower_screen_dimension * 0.1,
+        )
+        self.to_register_button.update_position(
+            x_size / 2 - self.to_register_button.width / 2, y_size * 0.6
+        )
+        self.to_register_button.draw()
 
         # Draw exit button
         self.exit_button.update_size(

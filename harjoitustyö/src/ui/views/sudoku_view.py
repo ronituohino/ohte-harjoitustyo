@@ -1,6 +1,7 @@
 import os
 import pygame
 from ui.components.button import Button
+from ui.components.text import text
 from ui.view import View
 from services.sudoku import Sudoku
 
@@ -26,7 +27,6 @@ class SudokuView(View):
                     grid_size + 1,
                     grid_size + 1,
                     str(self.sudoku.grid[i * 9 + j]),
-                    int(grid_size),
                     None,
                     self.sudoku.set_value,
                     (j, i),
@@ -42,7 +42,6 @@ class SudokuView(View):
                 grid_size,
                 grid_size,
                 str(i + 1),
-                int(grid_size),
                 ((0, 0, 0), 3),
                 self.sudoku.set_selection_value,
                 i + 1,
@@ -56,7 +55,6 @@ class SudokuView(View):
             self.canvas.lower_screen_dimension * 0.1,
             self.canvas.lower_screen_dimension * 0.1,
             "exit",
-            self.canvas.font_size,
             None,
             self.sudoku.exit_to_menu,
         )
@@ -86,7 +84,6 @@ class SudokuView(View):
                 button.update_text(str(self.sudoku.grid[i * 9 + j]))
                 button.update_position(j * grid_size, i * grid_size)
                 button.update_size(grid_size + 1, grid_size + 1)
-                button.update_font_size(int(grid_size))
                 if value > 0:
                     button.draw()
 
@@ -120,14 +117,18 @@ class SudokuView(View):
             button = self.number_buttons[i]
             button.update_position(10 * grid_size, i * grid_size)
             button.update_size(grid_size, grid_size)
-            button.update_font_size(int(grid_size))
             button.draw()
 
     def draw_success_message(self, grid_size):
         if self.sudoku.solved:
-            font = pygame.font.SysFont("comicsans", int(grid_size))
-            text = font.render("Congratulations!", 1, (0, 0, 0))
-            self.canvas.screen.blit(text, (0, grid_size * 10))
+            text(
+                self.canvas,
+                "Congratulations!",
+                0,
+                grid_size * 10,
+                (0, 0, 0),
+                self.canvas.font_size,
+            )
 
     def draw_exit_button(self, x_size):
         self.exit_button.update_size(

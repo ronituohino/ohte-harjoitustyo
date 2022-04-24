@@ -1,4 +1,5 @@
 import pygame
+from ui.components.text import render, blit
 
 
 class Textbox:
@@ -12,9 +13,9 @@ class Textbox:
         y: int,
         width: int,
         height: int,
+        max_chars: int,
         placeholder: str,
         placeholder_color: tuple,
-        font_size: int,
         outline: tuple,
         update_func,
     ):
@@ -24,9 +25,9 @@ class Textbox:
         self.y = y
         self.width = width
         self.height = height
+        self.max_chars = max_chars
         self.placeholder = placeholder
         self.placeholder_color = placeholder_color
-        self.font_size = font_size
         # Outline defined as ((r:int,g:int,b:int), thickness:int)
         self.outline = outline
         self.update_func = update_func
@@ -52,10 +53,12 @@ class Textbox:
 
     def write_char(self, char):
         if self.value:
-            self.value += char
+            if not self.max_chars or len(self.value) < self.max_chars:
+                self.value += char
+                self.update()
         else:
             self.value = char
-        self.update()
+            self.update()
 
     def delete_char(self):
         if self.value:
@@ -71,6 +74,14 @@ class Textbox:
 
     def set_errors(self, errors):
         self.errors = errors
+
+    def update_position(self, x: int, y: int) -> None:
+        self.x = x
+        self.y = y
+
+    def update_size(self, width: int, height: int) -> None:
+        self.width = width
+        self.height = height
 
     def draw(self):
         # Outline
@@ -92,26 +103,31 @@ class Textbox:
         )
 
         # Text in rect (value / placeholder)
-        font = pygame.font.SysFont("comicsans", self.font_size)
         if self.value:
-            text = font.render(self.value, 1, (0, 0, 0))
+            ren = render(self.value, (0, 0, 0), self.canvas.font_size)
+            blit(
+                self.canvas,
+                self.x + self.width * 0.02,
+                self.y + (self.height / 2 - ren.get_height() / 2),
+                ren,
+            )
         else:
-            text = font.render(self.placeholder, 1, self.placeholder_color)
-        self.canvas.screen.blit(
-            text,
-            (
-                self.x + (self.width / 2 - text.get_width() / 2),
-                self.y + (self.height / 2 - text.get_height() / 2),
-            ),
-        )
+            ren = render(
+                self.placeholder, self.placeholder_color, self.canvas.font_size
+            )
+            blit(
+                self.canvas,
+                self.x + self.width * 0.02,
+                self.y + (self.height / 2 - ren.get_height() / 2),
+                ren,
+            )
 
         # Error message
         if self.errors and len(self.errors) > 0:
-            text = font.render(self.errors[0], 1, (200, 0, 0))
-            self.canvas.screen.blit(
-                text,
-                (
-                    self.x + (self.width / 2 - text.get_width() / 2),
-                    self.y + (self.height / 2 - text.get_height() / 2) + self.height,
-                ),
+            ren = render(self.errors[0], (200, 0, 0), self.canvas.font_size * 0.5)
+            blit(
+                self.canvas,
+                self.x,
+                self.y + self.height + ren.get_height() / 2,
+                ren,
             )

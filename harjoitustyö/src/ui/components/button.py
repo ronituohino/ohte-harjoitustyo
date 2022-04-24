@@ -1,4 +1,5 @@
 import pygame
+from ui.components.text import render, blit
 
 # General button class to be used with Canvas UI
 
@@ -13,7 +14,6 @@ class Button:
         width: int,
         height: int,
         text: str,
-        font_size: int,
         outline: tuple,
         func,
         *args
@@ -24,7 +24,6 @@ class Button:
         self.width = width
         self.height = height
         self.text = text
-        self.font_size = font_size
         # Outline defined as ((r:int,g:int,b:int), thickness:int)
         self.outline = outline
         self.func = func
@@ -43,9 +42,6 @@ class Button:
     def update_size(self, width: int, height: int) -> None:
         self.width = width
         self.height = height
-
-    def update_font_size(self, font_size: int) -> None:
-        self.font_size = font_size
 
     def update_func(self, func) -> None:
         self.func = func
@@ -71,14 +67,12 @@ class Button:
         )
 
         if self.text != "":
-            font = pygame.font.SysFont("comicsans", self.font_size)
-            text = font.render(self.text, 1, (0, 0, 0))
-            self.canvas.screen.blit(
-                text,
-                (
-                    self.x + (self.width / 2 - text.get_width() / 2),
-                    self.y + (self.height / 2 - text.get_height() / 2),
-                ),
+            ren = render(self.text, (0, 0, 0), self.canvas.font_size)
+            blit(
+                self.canvas,
+                self.x + (self.width / 2 - ren.get_width() / 2),
+                self.y + (self.height / 2 - ren.get_height() / 2),
+                ren,
             )
 
     def is_over(self, pos: tuple) -> bool:

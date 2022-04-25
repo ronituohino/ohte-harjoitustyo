@@ -99,7 +99,8 @@ class Textbox:
 
         # Main rect
         pygame.draw.rect(
-            self.canvas.screen, self.color, (self.x, self.y, self.width, self.height), 0
+            self.canvas.screen, self.color, (self.x,
+                                             self.y, self.width, self.height), 0
         )
 
         # Text in rect (value / placeholder)
@@ -124,7 +125,8 @@ class Textbox:
 
         # Error message
         if self.errors and len(self.errors) > 0:
-            ren = render(self.errors[0], (200, 0, 0), self.canvas.font_size * 0.5)
+            ren = render(self.errors[0], (200, 0, 0),
+                         self.canvas.font_size * 0.5)
             blit(
                 self.canvas,
                 self.x,

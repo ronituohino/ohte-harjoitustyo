@@ -11,7 +11,8 @@ class RegisterView(View):
         self.register = register
 
         self.exit_button = Button(
-            canvas, (255, 0, 0), 0, 0, 100, 50, "X", ((0, 0, 0), 3), register.open_menu
+            canvas, (255, 0, 0), 0, 0, 100, 50, "X", ((
+                0, 0, 0), 3), register.open_menu
         )
 
         self.to_login_button = Button(

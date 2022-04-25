@@ -26,6 +26,8 @@ else:
     db.create()
 
 # Event Queue definition
+
+
 class EventQueue:
     def get(self):
         return pygame.event.get()

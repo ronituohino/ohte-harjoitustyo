@@ -17,7 +17,7 @@ class Database:
         self.cur = self.con.cursor()
 
     def get_sql_script(self, name):
-        with open(f"{self.cwd}/database/{name}", "r") as sql_file:
+        with open(f"{self.cwd}/database/{name}", "r", encoding="utf8") as sql_file:
             sql_script = sql_file.read()
         return sql_script
 
@@ -40,9 +40,10 @@ class Database:
         hash_value = generate_password_hash(password)
         try:
             sql = "INSERT INTO accounts (username, password) VALUES (:username, :password)"
-            self.cur.execute(sql, {"username": username, "password": hash_value})
+            self.cur.execute(
+                sql, {"username": username, "password": hash_value})
             self.con.commit()
-        except:
+        except sqlite3.Error:
             return False
         return self.login(username, password)
 
@@ -52,11 +53,11 @@ class Database:
         account = result.fetchone()
         if not account:
             return False
-        else:
-            if check_password_hash(account[1], password):
-                return {
-                    "id": account[0],
-                    "username": username,
-                }
-            else:
-                return False
+
+        if check_password_hash(account[1], password):
+            return {
+                "id": account[0],
+                "username": username,
+            }
+
+        return False

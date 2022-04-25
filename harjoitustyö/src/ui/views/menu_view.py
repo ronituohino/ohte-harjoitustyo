@@ -68,7 +68,8 @@ class MenuView(View):
             rendered_sudoku = self.menu.selected_sudoku + i
             if rendered_sudoku >= 0 and rendered_sudoku < self.menu.sudoku_amount:
                 ren = render(
-                    self.menu.sudokus[rendered_sudoku], (0, 0, 0), self.canvas.font_size
+                    self.menu.sudokus[rendered_sudoku], (
+                        0, 0, 0), self.canvas.font_size
                 )
                 blit(
                     self.canvas,

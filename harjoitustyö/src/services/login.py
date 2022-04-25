@@ -10,6 +10,11 @@ class Login:
     def __name__(self):
         return "Login"
 
+    # Pylint complains about similar lines here and in register.py, (also validate())
+    # However, both of these functions should remain unique
+    # R0801 = Similar lines in %s files
+
+    # pylint: disable=locally-disabled, R0801
     def validate(self):
         errors = {}
         err = username_validation(self.username)
@@ -30,9 +35,10 @@ class Login:
         result = self.game.database.login(self.username, self.password)
         if not result:
             return {"login": "Username or password invalid"}
-        else:
-            self.game.user = result
-            self.game.open_menu()
+
+        self.game.user = result
+        self.game.open_menu()
+        return None
 
     def open_menu(self):
         self.game.open_menu()

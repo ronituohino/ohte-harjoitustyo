@@ -1,16 +1,13 @@
-import os
-
 # Sudoku -service
 
 
 class Sudoku:
-    def __init__(self, name: str, game) -> None:
+    def __init__(self, game, sudoku_folder_path, sudoku_name) -> None:
         self.game = game
 
         # Read the .sudoku file
         string = ""
-        cwd = os.getcwd()
-        with open(f"{cwd}/sudokus/{name}", "r", encoding="utf8") as file:
+        with open(f"{sudoku_folder_path}/{sudoku_name}", "r", encoding="utf8") as file:
             i = 0
             for line in file:
                 if i < 12:
@@ -42,8 +39,8 @@ class Sudoku:
         self.selection_value = value
 
     def check_sudoku(self) -> bool:
-        horizontal_rows = [self.grid[i * 9: i * 9 + 9] for i in range(9)]
-        vertical_rows = [self.grid[i: 9 * 9 + i: 9] for i in range(9)]
+        horizontal_rows = [self.grid[i * 9 : i * 9 + 9] for i in range(9)]
+        vertical_rows = [self.grid[i : 9 * 9 + i : 9] for i in range(9)]
 
         for row in horizontal_rows:
             if not self.check_row(row):

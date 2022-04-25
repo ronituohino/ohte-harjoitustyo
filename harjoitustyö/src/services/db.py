@@ -15,7 +15,6 @@ class Database:
         else:
             self.con = sqlite3.connect(f"{self.cwd}/database/test.db")
         self.cur = self.con.cursor()
-        self.create()
 
     def get_sql_script(self, name):
         with open(f"{self.cwd}/database/{name}", "r") as sql_file:

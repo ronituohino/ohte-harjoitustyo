@@ -6,14 +6,15 @@ from services.register import Register
 
 
 class Game:
-    def __init__(self, canvas, event_queue, clock, database):
+    def __init__(self, canvas, event_queue, clock, database, sudoku_folder_path):
         self.canvas = canvas
         self.event_queue = event_queue
         self.clock = clock
         self.database = database
+        self.sudoku_folder_path = sudoku_folder_path
         self.user = None
 
-        self.set_service(Menu(self))
+        self.set_service(Menu(self, sudoku_folder_path))
 
     def set_service(self, service):
         self.service = service
@@ -49,20 +50,14 @@ class Game:
         return True
 
     def update_canvas(self):
-        # Background color
-        self.canvas.screen.fill((255, 255, 255))
-
         # Call UI functions
         self.canvas.tick()
 
-        # Draw the display
-        pygame.display.flip()
-
     def open_sudoku(self, name):
-        self.set_service(Sudoku(name, self))
+        self.set_service(Sudoku(self, self.sudoku_folder_path, name))
 
     def open_menu(self):
-        self.set_service(Menu(self))
+        self.set_service(Menu(self, self.sudoku_folder_path))
 
     def open_login(self):
         self.set_service(Login(self))

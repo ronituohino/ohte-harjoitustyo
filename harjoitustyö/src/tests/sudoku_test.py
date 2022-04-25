@@ -1,4 +1,6 @@
 import unittest
+import os
+
 from services.sudoku import Sudoku
 
 # Test main Sudoku functionality
@@ -7,7 +9,9 @@ from services.sudoku import Sudoku
 class TestSudoku(unittest.TestCase):
     def setUp(self):
         # Load a_start.sudoku from file before each test
-        self.sudoku = Sudoku("test.sudoku", None)
+        self.sudoku = Sudoku(
+            None, f"{os.getcwd()}/src/tests/test_sudokus", "test1.sudoku"
+        )
 
     def test_sudoku_load(self):
         self.assertEqual(

@@ -42,7 +42,13 @@ class Canvas:
             self.service_view = RegisterView(self, service)
 
     def tick(self):
+        # Background color
+        self.screen.fill((255, 255, 255))
+
         self.service_view.tick()
+
+        # Draw the display
+        pygame.display.flip()
 
     def add_button(self, button: "Button"):
         self.buttons.append(button)

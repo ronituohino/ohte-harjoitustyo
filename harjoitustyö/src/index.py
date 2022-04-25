@@ -1,8 +1,8 @@
 import sys
+import os
 import pygame
 from ui.canvas import Canvas
 from game import Game
-from event_queue import EventQueue
 from services.db import Database
 
 # Main init
@@ -25,7 +25,20 @@ else:
     db = Database(0)
     db.create()
 
-game = Game(Canvas(screen, screen_dimensions), EventQueue(), pygame.time.Clock(), db)
+# Event Queue definition
+class EventQueue:
+    def get(self):
+        return pygame.event.get()
+
+
+game = Game(
+    Canvas(screen, screen_dimensions),
+    EventQueue(),
+    pygame.time.Clock(),
+    db,
+    f"{os.getcwd()}/sudokus",
+)
+
 game.start_loop()
 
 pygame.quit()

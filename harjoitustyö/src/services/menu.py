@@ -3,12 +3,13 @@ from os.path import isfile, join
 
 
 class Menu:
-    def __init__(self, game):
+    def __init__(self, game, sudoku_folder_path):
         self.game = game
 
-        sudoku_path = f"{os.getcwd()}/sudokus"
         self.sudokus = [
-            f for f in os.listdir(sudoku_path) if isfile(join(sudoku_path, f))
+            f
+            for f in os.listdir(sudoku_folder_path)
+            if isfile(join(sudoku_folder_path, f))
         ]
         self.selected_sudoku = 0
         self.sudoku_amount = len(self.sudokus)

@@ -6,6 +6,10 @@ Sovellus on toteutettu Python -versiolla `3.8` ja muilla Python -versioilla saat
 
 Tämä sovellus on kurssin [Ohjelmistotekniikka 2022](https://ohjelmistotekniikka-hy.github.io/) harjoitustyö.
 
+## Julkaisut
+
+- [Viikko 5](https://github.com/ronituohino/ohte-harjoitustyo/releases/tag/viikko5)
+
 ## Dokumentaatio
 
 - [Vaatimusmäärittely](./harjoitustyö/dokumentaatio/vaatimusmaarittely.md)
@@ -27,7 +31,10 @@ Varmista, että sinulla on asennettuna Poetry.
 
 ### Ohjelman käynnistäminen
 
-Ohjelman voi käynnistää komennolla: `poetry run invoke start`
+Ohjelman voi käynnistää tuotantomoodissa komennolla: `poetry run invoke start`  
+Ohjelman voi käynnistää kehitysmoodissa komennolla: `poetry run invoke dev`
+
+Kehitysmoodissa käytetään kehitystietokantaa, joka alustetaan testausarvoilla aina kun sovellus käynnistetään uudestaan. Tuotantotietokanta säilyttää kaikki tiedot.
 
 ### Linttaus & formatointi
 

@@ -22,3 +22,14 @@ Projektin refaktorointia, ja Sudoku -valikon toiminnallisuus
 - Lisätty sovellusarkkitehtuuria kuvaava luokkakaavio [arkkitehtuuri.md](arkkitehtuuri.md)
 - Refaktoroitu pelisilmukka omaan Game -luokkaan
 - Refaktoroitu käyttöliittymä omiin tiedostoihin ui/views -kansioon
+
+## Viikko 5
+
+Käyttöliittymäluokkia, kirjautuminen, rekisteröityminen ja tietokanta
+
+- Lisätty kirjautumisnäkymä, josta pystyy kirjautumaan olemassa olevalle käyttäjälle
+- Lisätty rekisteröitymisnäkymä, josta pystyy tekemään uuden käyttäjän tietokantaan
+- Lisätty logout -nappi, josta kirjaudutaan ulos käyttäjätililtä
+- Refaktoroitu käyttöliittymäluokkia, ja luotu uusia (text.py, textbox.py, form.py) helpottamaan työskentelyä
+- Korotettu testauskattavuutta
+- Lisätty kirjautumistapahtumaa kuvaava sekvenssikaavio [arkkitehtuuri.md](arkkitehtuuri.md)

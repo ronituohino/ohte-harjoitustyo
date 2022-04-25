@@ -25,10 +25,10 @@ Sovellus koostuu alustavasti neljästä näkymästä. Myöhemmin saatetaan lisä
 - [x] Käyttäjä pystyy pelaamaan Sudokua
   - Graafinen käyttöliittymä
   - Ohjelma osaa tarkistaa Sudokun
-- [ ] Käyttäjä pystyy luomaan käyttäjätunnuksen
+- [x] Käyttäjä pystyy luomaan käyttäjätunnuksen
   - Tunnuksen luominen onnistuu syöttämällä käyttäjätunnuksen, salasanan ja salasanan uudestaan
   - Käyttäjätunnuksen täytyy olla uniikki, ja sisältää ainakin kaksi merkkiä
-- [ ] Käyttäjä pystyy kirjautumaan järjestelmään
+- [x] Käyttäjä pystyy kirjautumaan järjestelmään
   - Kirjautuminen onnistuu syöttämällä olemassa olevan käyttäjätunnus/salasana -yhdistelmän kirjautumislomakkeelle
 
 ### Kirjautumisen jälkeen
@@ -37,7 +37,7 @@ Sovellus koostuu alustavasti neljästä näkymästä. Myöhemmin saatetaan lisä
   - Suoritetut Sudokut
   - Sudokujen suorittamiseen käytetty aika
 - [ ] Käyttäjä pystyy katsomaan omia tilastojaan
-- [ ] Käyttäjä pystyy kirjautumaan ulos
+- [x] Käyttäjä pystyy kirjautumaan ulos
 
 ## Jatkokehitysideoita
 

@@ -6,10 +6,12 @@ from services.register import Register
 
 
 class Game:
-    def __init__(self, canvas, event_queue, clock):
+    def __init__(self, canvas, event_queue, clock, database):
         self.canvas = canvas
         self.event_queue = event_queue
         self.clock = clock
+        self.database = database
+        self.user = None
 
         self.set_service(Menu(self))
 
@@ -67,3 +69,6 @@ class Game:
 
     def open_register(self):
         self.set_service(Register(self))
+
+    def logout(self):
+        self.user = None

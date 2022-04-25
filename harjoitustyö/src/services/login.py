@@ -27,8 +27,12 @@ class Login:
             print(errors)
             return errors
 
-        print("success")
-        return True
+        result = self.game.database.login(self.username, self.password)
+        if not result:
+            return {"login": "Username or password invalid"}
+        else:
+            self.game.user = result
+            self.game.open_menu()
 
     def open_menu(self):
         self.game.open_menu()

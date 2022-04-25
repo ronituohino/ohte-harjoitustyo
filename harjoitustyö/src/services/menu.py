@@ -29,3 +29,6 @@ class Menu:
 
     def open_login(self):
         self.game.open_login()
+
+    def logout(self):
+        self.game.logout()

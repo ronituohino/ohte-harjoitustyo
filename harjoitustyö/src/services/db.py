@@ -1,5 +1,6 @@
 import sqlite3
 import os
+from werkzeug.security import check_password_hash, generate_password_hash
 
 
 class Database:
@@ -36,8 +37,27 @@ class Database:
         self.cur.execute(sql_script)
         self.con.commit()
 
-    def create_account(self):
-        pass
+    def create_account(self, username, password):
+        hash_value = generate_password_hash(password)
+        try:
+            sql = "INSERT INTO accounts (username, password) VALUES (:username, :password)"
+            self.cur.execute(sql, {"username": username, "password": hash_value})
+            self.con.commit()
+        except:
+            return False
+        return self.login(username, password)
 
     def login(self, username, password):
-        pass
+        sql = "SELECT id, password FROM accounts WHERE username=:username"
+        result = self.cur.execute(sql, {"username": username})
+        account = result.fetchone()
+        if not account:
+            return False
+        else:
+            if check_password_hash(account[1], password):
+                return {
+                    "id": account[0],
+                    "username": username,
+                }
+            else:
+                return False

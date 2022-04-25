@@ -35,8 +35,12 @@ class Register:
             print(errors)
             return errors
 
-        print("success")
-        return True
+        result = self.game.database.create_account(self.username, self.password)
+        if not result:
+            return {"register": "Username already taken"}
+        else:
+            self.game.user = result
+            self.game.open_menu()
 
     def open_menu(self):
         self.game.open_menu()

@@ -25,7 +25,7 @@ else:
     db = Database(0)
     db.create()
 
-game = Game(Canvas(screen, screen_dimensions), EventQueue(), pygame.time.Clock())
+game = Game(Canvas(screen, screen_dimensions), EventQueue(), pygame.time.Clock(), db)
 game.start_loop()
 
 pygame.quit()

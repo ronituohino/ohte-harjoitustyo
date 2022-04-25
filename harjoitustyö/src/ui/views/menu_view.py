@@ -3,7 +3,7 @@ from os.path import isfile, join
 import pygame
 from ui.view import View
 from ui.components.button import Button
-from ui.components.text import render, blit
+from ui.components.text import render, blit, text
 from services.menu import Menu
 
 
@@ -53,6 +53,9 @@ class MenuView(View):
         self.login_button = Button(
             canvas, (0, 0, 255), 0, 0, 100, 50, "login", None, self.menu.open_login
         )
+        self.logout_button = Button(
+            canvas, (255, 0, 0), 0, 0, 100, 50, "logout", None, self.menu.logout
+        )
 
     def tick(self):
         self.draw()
@@ -100,12 +103,33 @@ class MenuView(View):
         )
         self.open_button.draw()
 
-        # Draw login button
-        self.login_button.update_size(
-            self.canvas.lower_screen_dimension * 0.2,
-            self.canvas.lower_screen_dimension * 0.1,
-        )
-        self.login_button.update_position(
-            x_size / 2 - self.canvas.lower_screen_dimension * 0.1, 0
-        )
-        self.login_button.draw()
+        # Draw login / logout button
+        if not self.menu.game.user:
+            self.login_button.update_size(
+                self.canvas.lower_screen_dimension * 0.2,
+                self.canvas.lower_screen_dimension * 0.1,
+            )
+            self.login_button.update_position(
+                x_size / 2 - self.canvas.lower_screen_dimension * 0.1, 0
+            )
+            self.login_button.draw()
+        else:
+            # Logout button
+            self.logout_button.update_size(
+                self.canvas.lower_screen_dimension * 0.2,
+                self.canvas.lower_screen_dimension * 0.1,
+            )
+            self.logout_button.update_position(
+                x_size / 2 - self.canvas.lower_screen_dimension * 0.1, 0
+            )
+            self.logout_button.draw()
+
+            # Username
+            text(
+                self.canvas,
+                f"logged in: {self.menu.game.user['username']}",
+                self.logout_button.x + self.logout_button.width,
+                0,
+                (0, 0, 0),
+                self.canvas.font_size,
+            )

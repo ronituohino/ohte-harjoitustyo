@@ -7,6 +7,11 @@ def start(ctx):
 
 
 @task
+def dev(ctx):
+    ctx.run("python3 src/index.py dev", pty=True)
+
+
+@task
 def test(ctx):
     ctx.run("pytest src", pty=True)
 

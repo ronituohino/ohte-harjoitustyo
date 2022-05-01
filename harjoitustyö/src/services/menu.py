@@ -14,6 +14,14 @@ class Menu:
         self.selected_sudoku = 0
         self.sudoku_amount = len(self.sudokus)
 
+        if self.game.user != None:
+            self.completed_sudokus = self.get_completed_sudokus()
+        else:
+            self.completed_sudokus = []
+
+    def get_completed_sudokus(self):
+        return self.game.database.get_completed_list(self.game.user["id"])
+
     def __name__(self):
         return "Menu"
 

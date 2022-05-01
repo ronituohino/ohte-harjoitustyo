@@ -21,34 +21,40 @@ class Database:
             sql_script = sql_file.read()
         return sql_script
 
+    def get_commands_from_script(self, script):
+        commands = script.split(";")
+        return commands
+
     def create(self):
         sql_script = self.get_sql_script("schema.sql")
-        self.cur.execute(sql_script)
+        for command in self.get_commands_from_script(sql_script):
+            self.cur.execute(command)
         self.con.commit()
 
     def clear(self):
         sql_script = self.get_sql_script("clear.sql")
-        self.cur.execute(sql_script)
+        for command in self.get_commands_from_script(sql_script):
+            self.cur.execute(command)
         self.con.commit()
 
     def sample_data(self):
         sql_script = self.get_sql_script("sample.sql")
-        self.cur.execute(sql_script)
+        for command in self.get_commands_from_script(sql_script):
+            self.cur.execute(command)
         self.con.commit()
 
     def create_account(self, username, password):
         hash_value = generate_password_hash(password)
         try:
-            sql = "INSERT INTO accounts (username, password) VALUES (:username, :password)"
-            self.cur.execute(
-                sql, {"username": username, "password": hash_value})
+            sql = """INSERT INTO accounts (username, password) VALUES (:username, :password)"""
+            self.cur.execute(sql, {"username": username, "password": hash_value})
             self.con.commit()
         except sqlite3.Error:
             return False
         return self.login(username, password)
 
     def login(self, username, password):
-        sql = "SELECT id, password FROM accounts WHERE username=:username"
+        sql = """SELECT id, password FROM accounts WHERE username=:username"""
         result = self.cur.execute(sql, {"username": username})
         account = result.fetchone()
         if not account:
@@ -61,3 +67,11 @@ class Database:
             }
 
         return False
+
+    def get_completed_list(self, account_id):
+        sql = """SELECT sudoku FROM completions WHERE account_id=:account_id"""
+        result = self.cur.execute(sql, {"account_id": account_id})
+        arr = []
+        for result in result.fetchall():
+            arr.append(result[0])
+        return arr

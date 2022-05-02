@@ -47,7 +47,8 @@ class Database:
         hash_value = generate_password_hash(password)
         try:
             sql = """INSERT INTO accounts (username, password) VALUES (:username, :password);"""
-            self.cur.execute(sql, {"username": username, "password": hash_value})
+            self.cur.execute(
+                sql, {"username": username, "password": hash_value})
             self.con.commit()
         except sqlite3.Error:
             return False
@@ -75,7 +76,8 @@ class Database:
 
     def add_completed(self, account_id, sudoku, time):
         try:
-            sql = """INSERT INTO completions (account_id, sudoku, time) VALUES (:account_id, :sudoku, :time);"""
+            sql = """INSERT INTO completions (account_id, sudoku, time)
+                     VALUES (:account_id, :sudoku, :time);"""
             self.cur.execute(
                 sql, {"account_id": account_id, "sudoku": sudoku, "time": time}
             )

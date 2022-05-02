@@ -9,7 +9,8 @@ from utils.validation import (
 class TestValidation(unittest.TestCase):
     def test_username_empty(self):
         err = username_validation("")
-        self.assertEqual(len(err), 2)  # Username missing, must be at least 2 chars long
+        # Username missing, must be at least 2 chars long
+        self.assertEqual(len(err), 2)
 
     def test_username_too_short(self):
         err = username_validation("a")
@@ -21,7 +22,8 @@ class TestValidation(unittest.TestCase):
 
     def test_password_empty(self):
         err = password_validation("")
-        self.assertEqual(len(err), 2)  # Password missing, must be at least 4 chars long
+        # Password missing, must be at least 4 chars long
+        self.assertEqual(len(err), 2)
 
     def test_password_too_short(self):
         err = password_validation("abc")

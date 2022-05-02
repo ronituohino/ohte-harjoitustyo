@@ -2,7 +2,7 @@ import pygame
 
 
 def box(canvas: "Canvas", color, x, y, width, height, outline):
-    if outline != None:
+    if outline is not None:
         pygame.draw.rect(
             canvas.screen,
             outline[0],

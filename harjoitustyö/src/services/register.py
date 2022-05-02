@@ -35,7 +35,8 @@ class Register:
             print(errors)
             return errors
 
-        result = self.game.database.create_account(self.username, self.password)
+        result = self.game.database.create_account(
+            self.username, self.password)
         if not result:
             return {"register": "Username already taken"}
 

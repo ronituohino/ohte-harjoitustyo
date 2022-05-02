@@ -1,20 +1,15 @@
-import os
-from os.path import isfile, join
+from utils.sudoku import sudokus_in_folder
 
 
 class Menu:
     def __init__(self, game, sudoku_folder_path):
         self.game = game
 
-        self.sudokus = [
-            f.replace(".sudoku", "")
-            for f in os.listdir(sudoku_folder_path)
-            if isfile(join(sudoku_folder_path, f))
-        ]
+        self.sudokus = sudokus_in_folder(sudoku_folder_path)
         self.selected_sudoku = 0
         self.sudoku_amount = len(self.sudokus)
 
-        if self.game != None and self.game.user != None:
+        if self.game is not None and self.game.user is not None:
             self.completed_data = self.get_completed_data()
             self.completed_sudokus = [t[0] for t in self.completed_data]
         else:

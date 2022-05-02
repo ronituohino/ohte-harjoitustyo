@@ -1,4 +1,5 @@
 import time
+from utils.sudoku import parse_sudoku_file
 
 # Sudoku -service
 
@@ -10,21 +11,7 @@ class Sudoku:
         self.time_start = time.time()
         self.completion_time = None
 
-        # Read the .sudoku file
-        string = ""
-        with open(
-            f"{sudoku_folder_path}/{sudoku_name}.sudoku", "r", encoding="utf8"
-        ) as file:
-            i = 0
-            for line in file:
-                if i < 12:
-                    string += line
-
-        # Turn the file into string of numbers
-        string = string.replace("|", "")
-        string = string.replace(",", "")
-        string = string.replace("-", "")
-        string = string.replace("\n", "")
+        string = parse_sudoku_file(sudoku_folder_path, sudoku_name)
 
         # Init board data
         self.grid = [int(c) for c in string]
@@ -43,7 +30,7 @@ class Sudoku:
             self.completion_time = time.time() - self.time_start
 
             # If logged in -> update database
-            if self.game and self.game.user != None:
+            if self.game and self.game.user is not None:
                 account_id = self.game.user["id"]
                 self.game.database.add_completed(
                     account_id, self.sudoku_name, self.completion_time
@@ -57,8 +44,8 @@ class Sudoku:
         self.selection_value = value
 
     def check_sudoku(self) -> bool:
-        horizontal_rows = [self.grid[i * 9 : i * 9 + 9] for i in range(9)]
-        vertical_rows = [self.grid[i : 9 * 9 + i : 9] for i in range(9)]
+        horizontal_rows = [self.grid[i * 9: i * 9 + 9] for i in range(9)]
+        vertical_rows = [self.grid[i: 9 * 9 + i: 9] for i in range(9)]
 
         for row in horizontal_rows:
             if not self.check_row(row):

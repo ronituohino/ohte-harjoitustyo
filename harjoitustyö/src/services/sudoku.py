@@ -43,7 +43,7 @@ class Sudoku:
             self.completion_time = time.time() - self.time_start
 
             # If logged in -> update database
-            if self.game.user != None:
+            if self.game and self.game.user != None:
                 account_id = self.game.user["id"]
                 self.game.database.add_completed(
                     account_id, self.sudoku_name, self.completion_time

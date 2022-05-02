@@ -74,7 +74,7 @@ class TestGame(unittest.TestCase):
         self.assertEqual(self.game.service.__name__(), "Menu")
 
     def test_open_sudoku(self):
-        self.game.open_sudoku("test1.sudoku")
+        self.game.open_sudoku("test1")
         self.assertEqual(self.game.service.__name__(), "Sudoku")
 
     def test_open_login(self):

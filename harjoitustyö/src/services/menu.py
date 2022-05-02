@@ -14,7 +14,7 @@ class Menu:
         self.selected_sudoku = 0
         self.sudoku_amount = len(self.sudokus)
 
-        if self.game.user != None:
+        if self.game != None and self.game.user != None:
             self.completed_data = self.get_completed_data()
             self.completed_sudokus = [t[0] for t in self.completed_data]
         else:

@@ -9,9 +9,7 @@ from services.sudoku import Sudoku
 class TestSudoku(unittest.TestCase):
     def setUp(self):
         # Load a_start.sudoku from file before each test
-        self.sudoku = Sudoku(
-            None, f"{os.getcwd()}/src/tests/test_sudokus", "test1.sudoku"
-        )
+        self.sudoku = Sudoku(None, f"{os.getcwd()}/src/tests/test_sudokus", "test1")
 
     def test_sudoku_load(self):
         self.assertEqual(

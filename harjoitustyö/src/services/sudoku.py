@@ -1,13 +1,20 @@
+import time
+
 # Sudoku -service
 
 
 class Sudoku:
     def __init__(self, game, sudoku_folder_path, sudoku_name) -> None:
         self.game = game
+        self.sudoku_name = sudoku_name
+        self.time_start = time.time()
+        self.completion_time = None
 
         # Read the .sudoku file
         string = ""
-        with open(f"{sudoku_folder_path}/{sudoku_name}", "r", encoding="utf8") as file:
+        with open(
+            f"{sudoku_folder_path}/{sudoku_name}.sudoku", "r", encoding="utf8"
+        ) as file:
             i = 0
             for line in file:
                 if i < 12:
@@ -32,15 +39,26 @@ class Sudoku:
         self.grid[coords[1] * 9 + coords[0]] = self.selection_value
 
         # Also check if the Sudoku is solved now
-        self.solved = self.check_sudoku()
+        if self.check_sudoku():
+            self.completion_time = time.time() - self.time_start
+
+            # If logged in -> update database
+            if self.game.user != None:
+                account_id = self.game.user["id"]
+                self.game.database.add_completed(
+                    account_id, self.sudoku_name, self.completion_time
+                )
+
+            # Update solved state
+            self.solved = True
 
     # Set the selection value
     def set_selection_value(self, value: int) -> None:
         self.selection_value = value
 
     def check_sudoku(self) -> bool:
-        horizontal_rows = [self.grid[i * 9: i * 9 + 9] for i in range(9)]
-        vertical_rows = [self.grid[i: 9 * 9 + i: 9] for i in range(9)]
+        horizontal_rows = [self.grid[i * 9 : i * 9 + 9] for i in range(9)]
+        vertical_rows = [self.grid[i : 9 * 9 + i : 9] for i in range(9)]
 
         for row in horizontal_rows:
             if not self.check_row(row):

@@ -4,6 +4,7 @@ import pygame
 from ui.view import View
 from ui.components.button import Button
 from ui.components.text import render, blit, text
+from ui.components.box import box
 from services.menu import Menu
 
 
@@ -79,41 +80,37 @@ class MenuView(View):
     def draw(self):
         x_size, y_size = self.canvas.screen_dimensions
 
+        ren = render(
+            "Choose sudoku",
+            (0, 0, 0),
+            self.canvas.font_size,
+        )
+        blit(self.canvas, x_size * 0.5 - ren.get_size()[0] / 2, y_size * 0.3, ren)
+
         # Draw selectable sudokus
         for i in range(-1, 2):
             rendered_sudoku = self.menu.selected_sudoku + i
             if rendered_sudoku >= 0 and rendered_sudoku < self.menu.sudoku_amount:
                 # Render name text, but don't draw yet
-                sudoku_name = self.menu.sudokus[rendered_sudoku].replace(".sudoku", "")
+                sudoku_name = self.menu.sudokus[rendered_sudoku]
                 ren = render(
                     sudoku_name,
                     (0, 0, 0),
                     self.canvas.font_size,
                 )
-                name_x_pos = x_size * 0.5 + x_size * 0.33 * (i) - ren.get_size()[0] / 2
-                name_y_pos = y_size * 0.35 - ren.get_size()[1] / 2
+                x_center = x_size * 0.5 + x_size * 0.33 * (i)
+                name_x_pos = x_center - ren.get_size()[0] / 2
+                name_y_pos = y_size * 0.5 - ren.get_size()[1] / 2
 
                 # Render outline
-                pygame.draw.rect(
-                    self.canvas.screen,
-                    (0, 0, 0),
-                    (
-                        name_x_pos - 8,
-                        name_y_pos - 8,
-                        ren.get_size()[0] + 8 + 11,
-                        ren.get_size()[1] + 8 + 11,
-                    ),
-                )
-
-                pygame.draw.rect(
-                    self.canvas.screen,
+                box(
+                    self.canvas,
                     (255, 255, 255),
-                    (
-                        name_x_pos - 5,
-                        name_y_pos - 5,
-                        ren.get_size()[0] + 8 + 5,
-                        ren.get_size()[1] + 8 + 5,
-                    ),
+                    name_x_pos,
+                    name_y_pos,
+                    ren.get_size()[0],
+                    ren.get_size()[1],
+                    ((0, 0, 0), 3, 5),
                 )
 
                 # Draw name on top of outline stuff
@@ -124,17 +121,54 @@ class MenuView(View):
                     ren,
                 )
 
-                # Completed mark
-                print(sudoku_name)
-                print(self.menu.completed_sudokus)
-                if sudoku_name in self.menu.completed_sudokus:
-                    text(
-                        self.canvas,
+                # Completetion stuff
+                completion_times = [
+                    t[1] for t in self.menu.completed_data if t[0] == sudoku_name
+                ]
+                if len(completion_times) > 0:
+                    # 'Completed' mark
+                    ren = render(
                         "Completed",
-                        name_x_pos,
-                        y_size * 0.5,
-                        (0, 255, 0),
+                        (0, 0, 0),
                         self.canvas.font_size,
+                    )
+                    box(
+                        self.canvas,
+                        (0, 255, 0),
+                        x_center - ren.get_size()[0] / 2,
+                        y_size * 0.6 - ren.get_size()[1] / 2,
+                        ren.get_size()[0],
+                        ren.get_size()[1],
+                        ((0, 0, 0), 3, 3),
+                    )
+                    blit(
+                        self.canvas,
+                        x_center - ren.get_size()[0] / 2,
+                        y_size * 0.6 - ren.get_size()[1] / 2,
+                        ren,
+                    )
+
+                    # Time
+                    time_str = "{:.2f}".format(min(completion_times))
+                    ren = render(
+                        f"Time: {time_str}",
+                        (255, 255, 255),
+                        self.canvas.font_size,
+                    )
+                    box(
+                        self.canvas,
+                        (0, 0, 255),
+                        x_center - ren.get_size()[0] / 2,
+                        y_size * 0.7 - ren.get_size()[1] / 2,
+                        ren.get_size()[0],
+                        ren.get_size()[1],
+                        ((0, 0, 0), 3, 3),
+                    )
+                    blit(
+                        self.canvas,
+                        x_center - ren.get_size()[0] / 2,
+                        y_size * 0.7 - ren.get_size()[1] / 2,
+                        ren,
                     )
 
         # Draw left/right buttons
@@ -147,12 +181,12 @@ class MenuView(View):
             if i == 0:
                 button.update_position(
                     x_size * 0.1,
-                    y_size * 0.65 - self.canvas.lower_screen_dimension * 0.05,
+                    y_size - self.canvas.lower_screen_dimension * 0.1,
                 )
             if i == 1:
                 button.update_position(
                     x_size - self.canvas.lower_screen_dimension * 0.2 - x_size * 0.1,
-                    y_size * 0.65 - self.canvas.lower_screen_dimension * 0.05,
+                    y_size - self.canvas.lower_screen_dimension * 0.1,
                 )
             button.draw()
 
@@ -163,7 +197,7 @@ class MenuView(View):
         )
         self.open_button.update_position(
             x_size / 2 - self.canvas.lower_screen_dimension * 0.1,
-            y_size * 0.65 - self.canvas.lower_screen_dimension * 0.05,
+            y_size - self.canvas.lower_screen_dimension * 0.1,
         )
         self.open_button.draw()
 

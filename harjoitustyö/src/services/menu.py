@@ -7,7 +7,7 @@ class Menu:
         self.game = game
 
         self.sudokus = [
-            f
+            f.replace(".sudoku", "")
             for f in os.listdir(sudoku_folder_path)
             if isfile(join(sudoku_folder_path, f))
         ]
@@ -15,12 +15,14 @@ class Menu:
         self.sudoku_amount = len(self.sudokus)
 
         if self.game.user != None:
-            self.completed_sudokus = self.get_completed_sudokus()
+            self.completed_data = self.get_completed_data()
+            self.completed_sudokus = [t[0] for t in self.completed_data]
         else:
+            self.completed_data = []
             self.completed_sudokus = []
 
-    def get_completed_sudokus(self):
-        return self.game.database.get_completed_list(self.game.user["id"])
+    def get_completed_data(self):
+        return self.game.database.get_completed_data(self.game.user["id"])
 
     def __name__(self):
         return "Menu"
@@ -40,4 +42,6 @@ class Menu:
         self.game.open_login()
 
     def logout(self):
+        self.completed_data = []
+        self.completed_sudokus = []
         self.game.logout()

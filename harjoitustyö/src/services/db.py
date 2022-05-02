@@ -46,7 +46,7 @@ class Database:
     def create_account(self, username, password):
         hash_value = generate_password_hash(password)
         try:
-            sql = """INSERT INTO accounts (username, password) VALUES (:username, :password)"""
+            sql = """INSERT INTO accounts (username, password) VALUES (:username, :password);"""
             self.cur.execute(sql, {"username": username, "password": hash_value})
             self.con.commit()
         except sqlite3.Error:
@@ -54,7 +54,7 @@ class Database:
         return self.login(username, password)
 
     def login(self, username, password):
-        sql = """SELECT id, password FROM accounts WHERE username=:username"""
+        sql = """SELECT id, password FROM accounts WHERE username=:username;"""
         result = self.cur.execute(sql, {"username": username})
         account = result.fetchone()
         if not account:
@@ -68,10 +68,18 @@ class Database:
 
         return False
 
-    def get_completed_list(self, account_id):
-        sql = """SELECT sudoku FROM completions WHERE account_id=:account_id"""
+    def get_completed_data(self, account_id):
+        sql = """SELECT sudoku, time FROM completions WHERE account_id=:account_id;"""
         result = self.cur.execute(sql, {"account_id": account_id})
-        arr = []
-        for result in result.fetchall():
-            arr.append(result[0])
-        return arr
+        return result.fetchall()
+
+    def add_completed(self, account_id, sudoku, time):
+        try:
+            sql = """INSERT INTO completions (account_id, sudoku, time) VALUES (:account_id, :sudoku, :time);"""
+            self.cur.execute(
+                sql, {"account_id": account_id, "sudoku": sudoku, "time": time}
+            )
+            self.con.commit()
+        except sqlite3.Error:
+            return False
+        return True

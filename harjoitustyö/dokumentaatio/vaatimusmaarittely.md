@@ -33,10 +33,10 @@ Sovellus koostuu alustavasti neljästä näkymästä. Myöhemmin saatetaan lisä
 
 ### Kirjautumisen jälkeen
 
-- [ ] Käyttäjän tilastoja kerätään Sudokuja pelatessa
+- [x] Käyttäjän tilastoja kerätään Sudokuja pelatessa
   - Suoritetut Sudokut
   - Sudokujen suorittamiseen käytetty aika
-- [ ] Käyttäjä pystyy katsomaan omia tilastojaan
+- [x] Käyttäjä pystyy katsomaan omia tilastojaan
 - [x] Käyttäjä pystyy kirjautumaan ulos
 
 ## Jatkokehitysideoita

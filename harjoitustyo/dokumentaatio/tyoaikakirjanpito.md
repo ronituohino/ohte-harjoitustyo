@@ -18,14 +18,22 @@
 | 11.4. | 1        |  Refaktoroitu Game -luokka index.py tiedostosta                                       |
 | 11.4. | 0.5      | Käyttöliittymän korjausta & exit -nappi Sudokuun                                      |
 | 11.4. | 0.5      | Dokumentaation ylläpito, README.md, tuntikirjanpito, changelog.md                     |
-| 13.4  | 1        | Kirjautumis- ja rekisteröintinäkymät                                                  |
-| 13.4  | 1        | Form & Textbox -komponentit                                                           |
-| 13.4  | 1        | UI refaktorointia ja validointi                                                       |
-| 13.4  | 1        | Käyttöliittymien toiminnallisuus                                                      |
-| 14.4  | 1.5      | Käyttöliittymän siivous                                                               |
-| 15.4  | 1        | Tietokantojen lisäys                                                                  |
-| 15.4  | 1        | Kirjautumis- ja rekisteröintitoiminnallisuus                                          |
-| 15.4  | 1        | Testejä                                                                               |
-| 15.4  | 0.5      | Pylint virheet ja formatointi                                                         |
-| 15.4  | 0.5      | Sekvenssikaavio & dokumentaation ylläpito                                             |
-|  yht  | 22.5     |                                                                                       |
+| 22.4. | 1        | Kirjautumis- ja rekisteröintinäkymät                                                  |
+| 22.4. | 1        | Form & Textbox -komponentit                                                           |
+| 22.4. | 1        | UI refaktorointia ja validointi                                                       |
+| 22.4. | 1        | Käyttöliittymien toiminnallisuus                                                      |
+| 24.4. | 1.5      | Käyttöliittymän siivous                                                               |
+| 25.4. | 1        | Tietokantojen lisäys                                                                  |
+| 25.4. | 1        | Kirjautumis- ja rekisteröintitoiminnallisuus                                          |
+| 25.4. | 1        | Testejä                                                                               |
+| 25.4. | 0.5      | Pylint virheet ja formatointi                                                         |
+| 25.4. | 0.5      | Sekvenssikaavio & dokumentaation ylläpito                                             |
+| 1.5.  | 2.5      | Suoritusten seuranta, päävalikon käyttöliittymän päivitys                             |
+| 1.5.  | 2        | Suoritusten merkintä Sudokun suorituksessa, tietojen näyttö päävalikossa              |
+| 1.5.  | 1        | Testejä                                                                               |
+| 1.5.  | 0.5      | Rakenteen & lint -korjausta                                                           |
+| 2.5.  | 1.5      | Docstringit                                                                           |
+| 2.5.  | 1.5      | [arkkitehtuuri.md](arkkitehtuuri.md) päivitys                                         |
+| 2.5.  | 0.5      | [kayttoohje.md](kayttoohje.md)                                                        |
+| 2.5.  | 0.5      | Projektin säätämistä, tiedostojen hienosäätöä, nimeaämistä yms.                       |
+|  yht  | 32.5     |                                                                                       |

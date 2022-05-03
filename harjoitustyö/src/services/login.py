@@ -2,7 +2,21 @@ from utils.validation import username_validation, password_validation
 
 
 class Login:
+    """Luokka, joka hallitsee kirjautumisnäkymän toimintoja
+
+    Attributes:
+        game: Peliluokan referenssi
+        username: Tekstikenttään annettu käyttäjänimi
+        password: Tekstikenttään annettu salasana
+    """
+
     def __init__(self, game):
+        """Luokan konstruktori
+
+        Args:
+            game: Peliluokan referenssi
+        """
+
         self.game = game
         self.username = None
         self.password = None
@@ -16,6 +30,12 @@ class Login:
 
     # pylint: disable=locally-disabled, R0801
     def validate(self):
+        """Validoi syötetyt tiedot
+
+        Returns:
+            Virhetaulukon, tyhjä jos ei ole virheitä
+        """
+
         errors = {}
         err = username_validation(self.username)
         if len(err) > 0:
@@ -26,6 +46,12 @@ class Login:
         return errors
 
     def login(self):
+        """Aktivoi kirjautumistapahtuman: validointi, kirjautuminen
+
+        Returns:
+            Virhetaulukon, mutta jos kaikki onnistui niin None
+        """
+
         errors = self.validate()
 
         if len(errors.keys()) > 0:
@@ -41,7 +67,11 @@ class Login:
         return None
 
     def open_menu(self):
+        """Kutsuu peliluokan open_menu() -funktiota"""
+
         self.game.open_menu()
 
     def open_register(self):
+        """Kutsuu peliluokan open_register() -funktiota"""
+
         self.game.open_register()

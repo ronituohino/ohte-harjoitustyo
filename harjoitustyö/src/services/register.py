@@ -6,7 +6,22 @@ from utils.validation import (
 
 
 class Register:
+    """Luokka, joka hallitsee rekisteröitymisnäkymän toimintoja
+
+    Attributes:
+        game: Peliluokan referenssi
+        username: Tekstikenttään annettu käyttäjänimi
+        password: Tekstikenttään annettu salasana
+        password_again_ Tekstikenttään annettu salasana uudestaan
+    """
+
     def __init__(self, game):
+        """Luokan konstruktori
+
+        Args:
+            game: Peliluokan referenssi
+        """
+
         self.game = game
         self.username = None
         self.password = None
@@ -16,6 +31,12 @@ class Register:
         return "Register"
 
     def validate(self):
+        """Validoi syötetyt tiedot
+
+        Returns:
+            Virhetaulukon, tyhjä jos ei ole virheitä
+        """
+
         errors = {}
         err = username_validation(self.username)
         if len(err) > 0:
@@ -29,14 +50,19 @@ class Register:
         return errors
 
     def register(self):
+        """Aktivoi rekisteröitymistapahtuman: validointi, rekisteröityminen
+
+        Returns:
+            Virhetaulukon, mutta jos kaikki onnistui niin None
+        """
+
         errors = self.validate()
 
         if len(errors.keys()) > 0:
             print(errors)
             return errors
 
-        result = self.game.database.create_account(
-            self.username, self.password)
+        result = self.game.database.create_account(self.username, self.password)
         if not result:
             return {"register": "Username already taken"}
 
@@ -45,7 +71,11 @@ class Register:
         return None
 
     def open_menu(self):
+        """Kutsuu peliluokan open_menu() -funktiota"""
+
         self.game.open_menu()
 
     def open_login(self):
+        """Kutsuu peliluokan open_login() -funktiota"""
+
         self.game.open_login()

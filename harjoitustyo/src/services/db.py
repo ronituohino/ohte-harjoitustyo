@@ -98,7 +98,8 @@ class Database:
         hash_value = generate_password_hash(password)
         try:
             sql = """INSERT INTO accounts (username, password) VALUES (:username, :password);"""
-            self.cur.execute(sql, {"username": username, "password": hash_value})
+            self.cur.execute(
+                sql, {"username": username, "password": hash_value})
             self.con.commit()
         except sqlite3.Error:
             return False

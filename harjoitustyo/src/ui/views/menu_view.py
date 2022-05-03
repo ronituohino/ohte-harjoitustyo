@@ -103,7 +103,8 @@ class MenuView(View):
             (0, 0, 0),
             self.canvas.font_size,
         )
-        blit(self.canvas, x_size * 0.5 - ren.get_size()[0] / 2, y_size * 0.3, ren)
+        blit(self.canvas, x_size * 0.5 -
+             ren.get_size()[0] / 2, y_size * 0.3, ren)
 
         # Draw selectable sudokus
         for i in range(-1, 2):
@@ -250,6 +251,7 @@ class MenuView(View):
             blit(
                 self.canvas,
                 self._logout_button.x + self._logout_button.width + 15,
-                self.canvas.lower_screen_dimension * 0.05 - ren.get_size()[1] / 2,
+                self.canvas.lower_screen_dimension *
+                0.05 - ren.get_size()[1] / 2,
                 ren,
             )

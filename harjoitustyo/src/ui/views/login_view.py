@@ -25,7 +25,8 @@ class LoginView(View):
         self.login = login
 
         self._exit_button = Button(
-            canvas, (255, 0, 0), 0, 0, 100, 50, "X", ((0, 0, 0), 3), login.open_menu
+            canvas, (255, 0, 0), 0, 0, 100, 50, "X", ((
+                0, 0, 0), 3), login.open_menu
         )
 
         self._to_register_button = Button(

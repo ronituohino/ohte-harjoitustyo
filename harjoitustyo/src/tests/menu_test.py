@@ -49,4 +49,7 @@ class TestMenu(unittest.TestCase):
 
     def test_open_sudoku(self):
         self.menu.open_sudoku()
-        self.assertEqual(self.menu.game.last_sudoku_opened, "test2")
+        self.assertEqual(
+            self.menu.game.last_sudoku_opened,
+            self.menu.sudokus[self.menu.selected_sudoku],
+        )

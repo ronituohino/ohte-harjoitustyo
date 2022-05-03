@@ -55,3 +55,8 @@ Kirjaudu sisään painamalla `Login` nappia. Jos mitään ei tapahdu, käyttäj�
 ## Uloskirjautuminen
 
 Voit kirjautua ulos painamalla päävalikossa olevaa nappia `Logout`. Nappi näkyy ainoastaan jos olet kirjautunut jo sisään.
+
+## Sudokujen lisääminen
+
+Voit luoda lisää Sudokuja ohjelmaan asettamalla .sudoku -tiedostoja `sudokus` kansioon.  
+.sudoku -tiedostot ovat yksinkertaisia tekstitiedostoja, joissa on selkeä muotoilu Sudokun rakentamiseen.

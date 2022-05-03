@@ -56,5 +56,5 @@ Testikattavuuden voi generoida komennolla: `poetry run invoke coverage`
 Tämä generoi `.coverage` -tiedoston harjoitystyö -kansioon.
 
 Testikattavuudesta voi myös generoida HTML -tiedoston komennolla: `poetry run invoke coverage-report`  
-Tämä generoi kansion `htmlcov` harjoitustyö -kansioon.  
+Tämä generoi kansion `htmlcov` harjoitustyo -kansioon.  
 Kattavuutta voi tarkastella avaamalla `htmlcov` -kansiosta tiedoston `index.html` selaimella.

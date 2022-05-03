@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "harjoitustyö"
+name = "harjoitustyo"
 version = "0.1.0"
 description = ""
 authors = ["ronituohino <tuohinoroni@gmail.com>"]

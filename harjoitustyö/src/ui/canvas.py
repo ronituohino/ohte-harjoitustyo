@@ -11,7 +11,27 @@ from utils.resolution import get_lower_res, get_font_size
 
 
 class Canvas:
+    """Luokka, joka hallitsee käyttöliittymätoiminnallisuuksia
+
+    Attributes:
+        screen: Pygame screen -luokka
+        screen_dimensions: Peli-ikkunan koko [x, y]
+        buttons: Käyttöliittymällä olevat napit
+        textboxes: Käyttöliittymällä olevat syötelaatikot
+        focused_textbox: Käyttöliittymällä oleva valittu syötelaatikko
+        lower_screen_dimension: Peli-ikkunan pienempi akseli x/y
+        font_size: Käyttöliittymän universaali fonttikoko
+        service_view: Palvelun näkymäluokka
+    """
+
     def __init__(self, screen, screen_dimensions):
+        """Luokan konstruktori,
+
+        Args:
+            screen: Pygame screen -luokka
+            screen_dimensions: Peli-ikkunan koko [x, y]
+        """
+
         self.screen = screen
         self.screen_dimensions = screen_dimensions
 
@@ -25,6 +45,12 @@ class Canvas:
         self.service_view = None
 
     def set_service(self, service):
+        """Asettaa käytetyn palvelunäkymän peliluokan palvelun mukaisesti
+
+        Args:
+            service: Palveluluokka, jonka mukaan asettaa palvelunäkymä
+        """
+
         # Service has changed, update view
         # First remove old view's ui elements (buttons)
         self.buttons = []
@@ -42,6 +68,8 @@ class Canvas:
             self.service_view = RegisterView(self, service)
 
     def tick(self):
+        """Päivittää käyttöliittymän"""
+
         # Background color
         self.screen.fill((255, 255, 255))
 
@@ -51,15 +79,27 @@ class Canvas:
         pygame.display.flip()
 
     def add_button(self, button: "Button"):
+        """Lisää napin käyttöliittymään"""
+
         self.buttons.append(button)
 
     def add_textbox(self, textbox: "Textbox"):
+        """Lisää syötelaatikon käyttöliittymään"""
+
         self.textboxes.append(textbox)
 
     def remove_button(self, button: "Button"):
+        """Poistaa napin käyttöliittymästä"""
+
         self.buttons.remove(button)
 
     def handle_click(self, event: "Event"):
+        """Käsittelee klikkauksen käyttöliittymällä
+
+        Args:
+            event: Pygame -klikkaustapahtuma
+        """
+
         if event.button == 1:  # Left click
             for button in self.buttons:
                 if button.is_over(event.pos):
@@ -75,6 +115,12 @@ class Canvas:
                     self.focused_textbox = textbox
 
     def handle_text_input(self, event: "Event"):
+        """Käsittelee tekstisyötteen käyttöliittymällä
+
+        Args:
+            event: Pygamen -tekstisyötetapahtuma
+        """
+
         if self.focused_textbox:
             if event.key == pygame.K_BACKSPACE:
                 self.focused_textbox.delete_char()
@@ -82,6 +128,12 @@ class Canvas:
                 self.focused_textbox.write_char(event.unicode)
 
     def update_screen_dimensions(self, event):
+        """Päivittää ikkunan koon
+
+        Args:
+            event: Pygame VIDEORESIZE -tapahtuma
+        """
+
         self.screen_dimensions[0] = event.w
         self.screen_dimensions[1] = event.h
 

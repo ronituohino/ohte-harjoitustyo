@@ -1,4 +1,13 @@
 def username_validation(username):
+    """Validoi käyttäjänimen
+
+    Args:
+        username: Käyttäjänimi
+
+    Returns:
+        Taulukon, joka sisältää mahdolliset virheviestit
+    """
+
     errors = []
     if not username:
         errors.append("Username is required")
@@ -8,6 +17,15 @@ def username_validation(username):
 
 
 def password_validation(password):
+    """Validoi salasanan
+
+    Args:
+        password: Salasana
+
+    Returns:
+        Taulukon, joka sisältää mahdolliset virheviestit
+    """
+
     errors = []
     if not password:
         errors.append("Password is required")
@@ -17,6 +35,16 @@ def password_validation(password):
 
 
 def password_again_validation(password, password_again):
+    """Validoi salasana -uudestaan kentän
+
+    Args:
+        password: Salasana
+        password_again: Sama salasana uudestaan
+
+    Returns:
+        Taulukon, joka sisältää mahdolliset virheviestit
+    """
+
     errors = []
     if password != password_again:
         errors.append("Passwords have to match")

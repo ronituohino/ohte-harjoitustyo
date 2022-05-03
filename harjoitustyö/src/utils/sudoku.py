@@ -3,6 +3,16 @@ from os.path import isfile, join
 
 
 def parse_sudoku_file(sudoku_folder_path, sudoku_name):
+    """Lukee .sudoku -tiedoston ja palauttaa sen tekstijonona
+
+    Args:
+        sudoku_folder_path: Polku .sudoku -tiedostojen kansioon
+        sudoku_name: Sudokun nimi kansiossa
+
+    Returns:
+        .sudoku -tiedoston tekstijonona
+    """
+
     # Read the .sudoku file
     string = ""
     with open(
@@ -23,6 +33,15 @@ def parse_sudoku_file(sudoku_folder_path, sudoku_name):
 
 
 def sudokus_in_folder(sudoku_folder_path):
+    """Lukee kansion .sudoku -tiedostot
+
+    Args:
+        sudoku_folder_path: Polku kansioon
+
+    Returns:
+        Kansion .sudoku -tiedostojen nimet taulukkona
+    """
+
     return [
         f.replace(".sudoku", "")
         for f in os.listdir(sudoku_folder_path)

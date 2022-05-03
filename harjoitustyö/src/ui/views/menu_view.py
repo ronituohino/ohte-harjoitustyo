@@ -9,12 +9,26 @@ from services.menu import Menu
 
 
 class MenuView(View):
+    """Luokka päävalikkonäkymälle
+
+    Attributes:
+        canvas: Canvas -luokan referenssi
+        menu: Menu -luokan referenssi
+    """
+
     def __init__(self, canvas: "Canvas", menu):
+        """Luokan konstruktori
+
+        Args:
+            canvas: Canvas -luokan referenssi
+            menu: Menu -luokan referenssi
+        """
+
         self.canvas = canvas
         self.menu = menu
 
         # UI
-        self.move_buttons = [
+        self._move_buttons = [
             Button(
                 canvas,
                 (255, 0, 0),
@@ -39,7 +53,7 @@ class MenuView(View):
             ),
         ]
 
-        self.open_button = Button(
+        self._open_button = Button(
             canvas,
             (255, 0, 0),
             0,
@@ -51,7 +65,7 @@ class MenuView(View):
             self.menu.open_sudoku,
         )
 
-        self.login_button = Button(
+        self._login_button = Button(
             canvas,
             (0, 0, 255),
             0,
@@ -62,7 +76,7 @@ class MenuView(View):
             ((0, 0, 0), 3),
             self.menu.open_login,
         )
-        self.logout_button = Button(
+        self._logout_button = Button(
             canvas,
             (255, 0, 0),
             0,
@@ -75,9 +89,13 @@ class MenuView(View):
         )
 
     def tick(self):
+        """Päivittää päävalikkonäkymän"""
+
         self.draw()
 
     def draw(self):
+        """Piirtää päävalikkonäkymän ikkunaan"""
+
         x_size, y_size = self.canvas.screen_dimensions
 
         ren = render(
@@ -85,8 +103,7 @@ class MenuView(View):
             (0, 0, 0),
             self.canvas.font_size,
         )
-        blit(self.canvas, x_size * 0.5 -
-             ren.get_size()[0] / 2, y_size * 0.3, ren)
+        blit(self.canvas, x_size * 0.5 - ren.get_size()[0] / 2, y_size * 0.3, ren)
 
         # Draw selectable sudokus
         for i in range(-1, 2):
@@ -174,7 +191,7 @@ class MenuView(View):
 
         # Draw left/right buttons
         for i in range(2):
-            button = self.move_buttons[i]
+            button = self._move_buttons[i]
             button.update_size(
                 self.canvas.lower_screen_dimension * 0.2,
                 self.canvas.lower_screen_dimension * 0.1,
@@ -192,36 +209,36 @@ class MenuView(View):
             button.draw()
 
         # Draw open Sudoku button
-        self.open_button.update_size(
+        self._open_button.update_size(
             self.canvas.lower_screen_dimension * 0.2,
             self.canvas.lower_screen_dimension * 0.1,
         )
-        self.open_button.update_position(
+        self._open_button.update_position(
             x_size / 2 - self.canvas.lower_screen_dimension * 0.1,
             y_size - self.canvas.lower_screen_dimension * 0.1,
         )
-        self.open_button.draw()
+        self._open_button.draw()
 
         # Draw login / logout button
         if not self.menu.game.user:
-            self.login_button.update_size(
+            self._login_button.update_size(
                 self.canvas.lower_screen_dimension * 0.2,
                 self.canvas.lower_screen_dimension * 0.1,
             )
-            self.login_button.update_position(
+            self._login_button.update_position(
                 x_size / 2 - self.canvas.lower_screen_dimension * 0.1, 0
             )
-            self.login_button.draw()
+            self._login_button.draw()
         else:
             # Logout button
-            self.logout_button.update_size(
+            self._logout_button.update_size(
                 self.canvas.lower_screen_dimension * 0.2,
                 self.canvas.lower_screen_dimension * 0.1,
             )
-            self.logout_button.update_position(
+            self._logout_button.update_position(
                 x_size / 2 - self.canvas.lower_screen_dimension * 0.1, 0
             )
-            self.logout_button.draw()
+            self._logout_button.draw()
 
             # Username
             ren = render(
@@ -232,8 +249,7 @@ class MenuView(View):
 
             blit(
                 self.canvas,
-                self.logout_button.x + self.logout_button.width + 15,
-                self.canvas.lower_screen_dimension *
-                0.05 - ren.get_size()[1] / 2,
+                self._logout_button.x + self._logout_button.width + 15,
+                self.canvas.lower_screen_dimension * 0.05 - ren.get_size()[1] / 2,
                 ren,
             )

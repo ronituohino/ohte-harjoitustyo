@@ -6,16 +6,29 @@ from ui.components.text import text
 
 
 class RegisterView(View):
+    """Luokka rekisteröitymisnäkymälle
+
+    Attributes:
+        canvas: Canvas -luokan referenssi
+        register: Register -luokan referenssi
+    """
+
     def __init__(self, canvas: "Canvas", register):
+        """Luokan konstruktori
+
+        Args:
+            canvas: Canvas -luokan referenssi
+            register: Register -luokan referenssi
+        """
+
         self.canvas = canvas
         self.register = register
 
-        self.exit_button = Button(
-            canvas, (255, 0, 0), 0, 0, 100, 50, "X", ((
-                0, 0, 0), 3), register.open_menu
+        self._exit_button = Button(
+            canvas, (255, 0, 0), 0, 0, 100, 50, "X", ((0, 0, 0), 3), register.open_menu
         )
 
-        self.to_login_button = Button(
+        self._to_login_button = Button(
             canvas,
             (255, 0, 0),
             0,
@@ -27,11 +40,11 @@ class RegisterView(View):
             register.open_login,
         )
 
-        self.register_form = Form(register.validate)
+        self._register_form = Form(register.validate)
 
-        self.username_textbox = Textbox(
+        self._username_textbox = Textbox(
             canvas,
-            self.register_form,
+            self._register_form,
             "username",
             (245, 245, 245),
             0,
@@ -42,12 +55,12 @@ class RegisterView(View):
             "Username",
             (200, 200, 200),
             ((0, 0, 0), 3),
-            self.set_username,
+            self._set_username,
         )
 
-        self.password_textbox = Textbox(
+        self._password_textbox = Textbox(
             canvas,
-            self.register_form,
+            self._register_form,
             "password",
             (245, 245, 245),
             0,
@@ -58,12 +71,12 @@ class RegisterView(View):
             "Password",
             (200, 200, 200),
             ((0, 0, 0), 3),
-            self.set_password,
+            self._set_password,
         )
 
-        self.password_again_textbox = Textbox(
+        self._password_again_textbox = Textbox(
             canvas,
-            self.register_form,
+            self._register_form,
             "password_again",
             (245, 245, 245),
             0,
@@ -74,12 +87,12 @@ class RegisterView(View):
             "Password again",
             (200, 200, 200),
             ((0, 0, 0), 3),
-            self.set_password_again,
+            self._set_password_again,
         )
 
-        self.register_form.attach_textbox(self.username_textbox)
-        self.register_form.attach_textbox(self.password_textbox)
-        self.register_form.attach_textbox(self.password_again_textbox)
+        self._register_form.attach_textbox(self._username_textbox)
+        self._register_form.attach_textbox(self._password_textbox)
+        self._register_form.attach_textbox(self._password_again_textbox)
 
         self.register_button = Button(
             canvas,
@@ -93,57 +106,61 @@ class RegisterView(View):
             register.register,
         )
 
-    def set_username(self, username):
+    def _set_username(self, username):
         self.register.username = username
 
-    def set_password(self, password):
+    def _set_password(self, password):
         self.register.password = password
 
-    def set_password_again(self, password_again):
+    def _set_password_again(self, password_again):
         self.register.password_again = password_again
 
     def tick(self):
+        """Päivittää rekisteröitymisnäkymän"""
+
         self.draw()
 
     def draw(self):
+        """Piirtää rekisteröitymisnäkymän ikkunaan"""
+
         x_size, y_size = self.canvas.screen_dimensions
 
         # Draw registration form
         text(
             self.canvas,
             "Register",
-            x_size / 2 - self.username_textbox.width / 2,
+            x_size / 2 - self._username_textbox.width / 2,
             y_size * 0.075,
             (0, 0, 0),
             self.canvas.font_size,
         )
 
-        self.username_textbox.update_size(
+        self._username_textbox.update_size(
             self.canvas.lower_screen_dimension * 0.4,
             self.canvas.lower_screen_dimension * 0.1,
         )
-        self.username_textbox.update_position(
-            x_size / 2 - self.username_textbox.width / 2, y_size * 0.15
+        self._username_textbox.update_position(
+            x_size / 2 - self._username_textbox.width / 2, y_size * 0.15
         )
-        self.username_textbox.draw()
+        self._username_textbox.draw()
 
-        self.password_textbox.update_size(
+        self._password_textbox.update_size(
             self.canvas.lower_screen_dimension * 0.4,
             self.canvas.lower_screen_dimension * 0.1,
         )
-        self.password_textbox.update_position(
-            x_size / 2 - self.password_textbox.width / 2, y_size * 0.3
+        self._password_textbox.update_position(
+            x_size / 2 - self._password_textbox.width / 2, y_size * 0.3
         )
-        self.password_textbox.draw()
+        self._password_textbox.draw()
 
-        self.password_again_textbox.update_size(
+        self._password_again_textbox.update_size(
             self.canvas.lower_screen_dimension * 0.4,
             self.canvas.lower_screen_dimension * 0.1,
         )
-        self.password_again_textbox.update_position(
-            x_size / 2 - self.password_again_textbox.width / 2, y_size * 0.45
+        self._password_again_textbox.update_position(
+            x_size / 2 - self._password_again_textbox.width / 2, y_size * 0.45
         )
-        self.password_again_textbox.draw()
+        self._password_again_textbox.draw()
 
         self.register_button.update_size(
             self.canvas.lower_screen_dimension * 0.4,
@@ -154,21 +171,21 @@ class RegisterView(View):
         )
         self.register_button.draw()
 
-        self.to_login_button.update_size(
+        self._to_login_button.update_size(
             self.canvas.lower_screen_dimension * 0.7,
             self.canvas.lower_screen_dimension * 0.1,
         )
-        self.to_login_button.update_position(
-            x_size / 2 - self.to_login_button.width / 2, y_size * 0.75
+        self._to_login_button.update_position(
+            x_size / 2 - self._to_login_button.width / 2, y_size * 0.75
         )
-        self.to_login_button.draw()
+        self._to_login_button.draw()
 
         # Draw exit button
-        self.exit_button.update_size(
+        self._exit_button.update_size(
             self.canvas.lower_screen_dimension * 0.1,
             self.canvas.lower_screen_dimension * 0.1,
         )
-        self.exit_button.update_position(
+        self._exit_button.update_position(
             x_size - self.canvas.lower_screen_dimension * 0.1, 0
         )
-        self.exit_button.draw()
+        self._exit_button.draw()

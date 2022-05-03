@@ -33,3 +33,12 @@ Käyttöliittymäluokkia, kirjautuminen, rekisteröityminen ja tietokanta
 - Refaktoroitu käyttöliittymäluokkia, ja luotu uusia (text.py, textbox.py, form.py) helpottamaan työskentelyä
 - Korotettu testauskattavuutta
 - Lisätty kirjautumistapahtumaa kuvaava sekvenssikaavio [arkkitehtuuri.md](arkkitehtuuri.md)
+
+## Viikko 6
+
+- Lisätty suoritettujen Sudokujen tallennus tietokantaan ja esitys päävalikkoon
+- Lisätty testikattavuutta
+- Parannettu koodin rakennetta ja laatua
+- Lisätty docstringit lähestulkoon kaikkiin luokkiin ja funktioihin
+- Parannettu [arkkitehtuurikuvausta](arkkitehtuuri.md)
+- Lisätty [käyttöohje](kayttoohje.md)

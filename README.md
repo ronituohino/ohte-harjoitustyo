@@ -8,14 +8,16 @@ Tämä sovellus on kurssin [Ohjelmistotekniikka 2022](https://ohjelmistotekniikk
 
 ## Julkaisut
 
+- [Viikko 6](https://github.com/ronituohino/ohte-harjoitustyo/releases/tag/viikko6)
 - [Viikko 5](https://github.com/ronituohino/ohte-harjoitustyo/releases/tag/viikko5)
 
 ## Dokumentaatio
 
-- [Vaatimusmäärittely](./harjoitustyö/dokumentaatio/vaatimusmaarittely.md)
-- [Arkkitehtuuri](./harjoitustyö/dokumentaatio/arkkitehtuuri.md)
-- [Työaikakirjanpito](./harjoitustyö/dokumentaatio/tyoaikakirjanpito.md)
-- [Changelog](./harjoitustyö/dokumentaatio/changelog.md)
+- [Vaatimusmäärittely](./harjoitustyo/dokumentaatio/vaatimusmaarittely.md)
+- [Arkkitehtuuri](./harjoitustyo/dokumentaatio/arkkitehtuuri.md)
+- [Työaikakirjanpito](./harjoitustyo/dokumentaatio/tyoaikakirjanpito.md)
+- [Changelog](./harjoitustyo/dokumentaatio/changelog.md)
+- [Käyttöohje](./harjoitustyo/dokumentaatio/kayttoohje.md)
 
 ## Asennus
 

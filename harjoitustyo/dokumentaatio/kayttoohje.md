@@ -42,16 +42,16 @@ Tarkoituksena on täyttää Sudoku -ruudukko siten, että jokaisessaa 3x3 ruuduk
 
 Voit luoda käyttäjän peliin jolloin ratkaistut sudokut, ja niihin käytetty aika, kirjataan ylös.
 
-Käyttäjän pystyy luomaan päävalikosta painamalla ensin nappia "Login", ja sen jälkeen nappia "New user?". Kenttiin pystyy kirjoittamaan painamalla niitä ensin hiirellä ja sen jälkeen naputtelemalla näppäimistöllä.
+Käyttäjän pystyy luomaan päävalikosta painamalla ensin nappia `Login`, ja sen jälkeen nappia `New user?`. Kenttiin pystyy kirjoittamaan painamalla niitä ensin hiirellä ja sen jälkeen naputtelemalla näppäimistöllä.
 
-Paina nappia "Register", kun kentät ovat täynnä. Jos mitään ei tapahdu, käyttäjänimesi on jo käytössä.
+Paina nappia `Register`, kun kentät ovat täynnä. Jos mitään ei tapahdu, käyttäjänimesi on jo käytössä.
 
 ## Kirjautuminen
 
-Voit kirjautua käyttäjälle menemällä "Login" näkymään ja täyttämällä käyttäjänimen ja salasanan.
+Voit kirjautua käyttäjälle menemällä `Login` näkymään ja täyttämällä käyttäjänimen ja salasanan.
 
-Kirjaudu sisään painamalla "Login" nappia. Jos mitään ei tapahdu, käyttäjänimi tai salasana on väärin.
+Kirjaudu sisään painamalla `Login` nappia. Jos mitään ei tapahdu, käyttäjänimi tai salasana on väärin.
 
 ## Uloskirjautuminen
 
-Voit kirjautua ulos painamalla päävalikossa olevaa nappia "Logout". Nappi näkyy ainoastaan jos olet kirjautunut jo sisään.
+Voit kirjautua ulos painamalla päävalikossa olevaa nappia `Logout`. Nappi näkyy ainoastaan jos olet kirjautunut jo sisään.

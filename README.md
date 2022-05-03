@@ -19,8 +19,8 @@ Tämä sovellus on kurssin [Ohjelmistotekniikka 2022](https://ohjelmistotekniikk
 
 ## Asennus
 
-Varmista, että sinulla on asennettuna Python ja sen versio on `3.8` tai uudempi.  
-Varmista, että sinulla on asennettuna Poetry.  
+Varmista, että sinulla on asennettuna Python ja sen versio on 3.8 tai uudempi.  
+Varmista, että sinulla on asennettuna Poetry.
 
 - Kloonaa tämä repo koneellesi
 - Avaa terminaali ja siirry kansioon `harjoitystyö/`

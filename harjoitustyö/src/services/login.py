@@ -33,7 +33,8 @@ class Login:
         """Validoi syötetyt tiedot
 
         Returns:
-            Virhetaulukon, tyhjä jos ei ole virheitä
+            Virhetaulukon jos on virheitä,
+            Tyhjä taulukko jos ei ole virheitä
         """
 
         errors = {}
@@ -49,7 +50,8 @@ class Login:
         """Aktivoi kirjautumistapahtuman: validointi, kirjautuminen
 
         Returns:
-            Virhetaulukon, mutta jos kaikki onnistui niin None
+            Virhetaulukon jos on virheitä,
+            None jos ei ole virheitä
         """
 
         errors = self.validate()

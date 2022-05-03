@@ -36,6 +36,8 @@ Käyttöliittymäluokkia, kirjautuminen, rekisteröityminen ja tietokanta
 
 ## Viikko 6
 
+Suoritettujen sudokujen esitys päävalikkoon sekä kattavan dokumentaation tuottaminen
+
 - Lisätty suoritettujen Sudokujen tallennus tietokantaan ja esitys päävalikkoon
 - Lisätty testikattavuutta
 - Parannettu koodin rakennetta ja laatua

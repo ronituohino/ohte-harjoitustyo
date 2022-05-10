@@ -23,9 +23,19 @@ class FakeGame:
         self.logout_called += 1
 
 
+class FakeDatabase:
+    def get_menu_location(self):
+        return 0
+
+    def set_menu_location(self, index):
+        pass
+
+
 class TestMenu(unittest.TestCase):
     def setUp(self):
-        self.menu = Menu(FakeGame(), f"{os.getcwd()}/src/tests/test_sudokus")
+        self.menu = Menu(
+            FakeGame(), FakeDatabase(), f"{os.getcwd()}/src/tests/test_sudokus"
+        )
 
     def test_sudoku_read(self):
         self.assertEqual(self.menu.sudoku_amount, 2)

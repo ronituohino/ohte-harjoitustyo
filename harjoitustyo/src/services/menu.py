@@ -28,7 +28,7 @@ class Menu:
         self.sudoku_amount = len(self.sudokus)
 
         last_menu_sudoku_index = database.get_menu_location()
-        if last_menu_sudoku_index == None:
+        if last_menu_sudoku_index is None:
             last_menu_sudoku_index = 0
 
         elif last_menu_sudoku_index >= self.sudoku_amount:

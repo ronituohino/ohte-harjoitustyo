@@ -21,10 +21,10 @@ class FakeCanvas:
     def tick(self):
         self.tick_called += 1
 
-    def handle_click(self, event: "Event"):
+    def handle_click(self, event: "FakeEvent"):
         self.handle_click_called += 1
 
-    def handle_text_input(self, event: "Event"):
+    def handle_text_input(self, event: "FakeEvent"):
         self.handle_text_input_called += 1
 
     def update_screen_dimensions(self, event):
@@ -54,6 +54,9 @@ class FakeClock:
 
     def tick(self):
         self.tick_called += 1
+
+
+# Test Game class functionality, but also app integration
 
 
 class TestGame(unittest.TestCase):
@@ -95,3 +98,59 @@ class TestGame(unittest.TestCase):
 
         self.assertEqual(self.game.canvas.handle_click_called, 2)
         self.assertEqual(self.game.canvas.update_screen_dimensions_called, 1)
+
+    def test_solve_sudoku(self):
+        # Navigate to open test2.sudoku
+        self.game.service.move_right()
+        self.game.service.move_left()
+        self.assertEqual(
+            self.game.service.sudokus[self.game.service.selected_sudoku], "test2"
+        )
+        self.game.service.open_sudoku()
+
+        # Place missing pieces
+        self.game.service.set_selection_value(3)
+        self.game.service.set_value((6, 1))
+
+        self.game.service.set_selection_value(8)
+        self.game.service.set_value((3, 2))
+
+        self.game.service.set_selection_value(7)
+        self.game.service.set_value((2, 5))
+
+        self.assertEqual(self.game.service.solved, True)
+
+    def test_registration(self):
+        # Open login view
+        self.game.service.open_login()
+
+        # Click "new user?" -button
+        self.game.service.open_register()
+
+        self.game.service.username = "jare"
+        self.game.service.password = "12345"
+        self.game.service.password_again = "12345"
+        self.game.service.register()
+
+        self.assertEqual(self.game.user, {"id": 2, "username": "jare"})
+
+    def test_login(self):
+        self.game.service.open_login()
+
+        self.game.service.username = "roni"
+        self.game.service.password = "123qwe123"
+
+        self.game.service.login()
+
+        self.assertEqual(self.game.user, {"id": 1, "username": "roni"})
+
+    def test_logout(self):
+        # Log in first
+        self.game.service.open_login()
+        self.game.service.username = "roni"
+        self.game.service.password = "123qwe123"
+        self.game.service.login()
+
+        self.game.service.logout()
+
+        self.assertEqual(self.game.user, None)

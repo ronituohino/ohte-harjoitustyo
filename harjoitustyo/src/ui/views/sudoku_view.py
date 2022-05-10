@@ -1,8 +1,9 @@
 import os
 import pygame
 from ui.components.button import Button
-from ui.components.text import text
+from ui.components.text import render, blit
 from ui.view import View
+from ui.components.box import box
 from services.sudoku import Sudoku
 
 # Sudoku Game view
@@ -68,8 +69,8 @@ class SudokuView(View):
             0,
             self.canvas.lower_screen_dimension * 0.1,
             self.canvas.lower_screen_dimension * 0.1,
-            "exit",
-            None,
+            "Exit",
+            ((0, 0, 0), 3),
             self.sudoku.exit_to_menu,
         )
 
@@ -86,26 +87,30 @@ class SudokuView(View):
 
         x_size, y_size = self.canvas.screen_dimensions
         grid_size = self.canvas.lower_screen_dimension / 11
+        x_offset = (x_size - self.canvas.lower_screen_dimension) / 2
+        y_offset = (y_size - self.canvas.lower_screen_dimension) / 2 + grid_size
 
-        self._draw_sudoku_buttons(grid_size)
-        self._draw_sudoku_grid(grid_size)
-        self._draw_number_selection(grid_size)
-        self._draw_success_message(grid_size)
+        self._draw_sudoku_buttons(grid_size, x_offset, y_offset)
+        self._draw_sudoku_grid(grid_size, x_offset, y_offset)
+        self._draw_number_selection(grid_size, x_offset, y_offset)
+        self._draw_success_message(x_size, y_size)
         self._draw_exit_button(x_size)
 
-    def _draw_sudoku_buttons(self, grid_size):
+    def _draw_sudoku_buttons(self, grid_size, x_offset, y_offset):
         # Draw numbered squares
         for i in range(9):
             for j in range(9):
                 value = self.sudoku.grid[i * 9 + j]
                 button = self._sudoku_buttons[i * 9 + j]
                 button.update_text(str(self.sudoku.grid[i * 9 + j]))
-                button.update_position(j * grid_size, i * grid_size)
+                button.update_position(
+                    x_offset + j * grid_size, y_offset + i * grid_size
+                )
                 button.update_size(grid_size + 1, grid_size + 1)
                 if value > 0:
                     button.draw()
 
-    def _draw_sudoku_grid(self, grid_size):
+    def _draw_sudoku_grid(self, grid_size, x_offset, y_offset):
         # Draw lines horizontally and vertically to form grid
         for i in range(10):
             # Varying thickness
@@ -117,35 +122,45 @@ class SudokuView(View):
             pygame.draw.line(
                 self.canvas.screen,
                 (0, 0, 0),
-                (0, i * grid_size),
-                (grid_size * 9, i * grid_size),
+                (x_offset, y_offset + i * grid_size),
+                (x_offset + grid_size * 9, y_offset + i * grid_size),
                 thickness,
             )
             pygame.draw.line(
                 self.canvas.screen,
                 (0, 0, 0),
-                (i * grid_size, 0),
-                (i * grid_size, grid_size * 9),
+                (x_offset + i * grid_size, y_offset),
+                (x_offset + i * grid_size, y_offset + grid_size * 9),
                 thickness,
             )
 
-    def _draw_number_selection(self, grid_size):
+    def _draw_number_selection(self, grid_size, x_offset, y_offset):
         # Draw number selection buttons
         for i in range(9):
             button = self._number_buttons[i]
-            button.update_position(10 * grid_size, i * grid_size)
+            button.update_position(x_offset + 10 * grid_size, y_offset + i * grid_size)
             button.update_size(grid_size, grid_size)
             button.draw()
 
-    def _draw_success_message(self, grid_size):
+    def _draw_success_message(self, x_size, y_size):
         if self.sudoku.solved:
-            text(
+            ren = render("Congratulations!", (0, 0, 0), self.canvas.font_size)
+
+            box(
                 self.canvas,
-                "Congratulations!",
-                0,
-                grid_size * 10,
-                (0, 0, 0),
-                self.canvas.font_size,
+                (255, 255, 255),
+                x_size / 2 - ren.get_size()[0] / 2,
+                y_size / 2 - ren.get_size()[1] / 2,
+                ren.get_size()[0],
+                ren.get_size()[1],
+                ((0, 0, 0), 3, 3),
+            )
+
+            blit(
+                self.canvas,
+                x_size / 2 - ren.get_size()[0] / 2,
+                y_size / 2 - ren.get_size()[1] / 2,
+                ren,
             )
 
     def _draw_exit_button(self, x_size):

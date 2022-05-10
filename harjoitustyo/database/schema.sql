@@ -10,3 +10,9 @@ CREATE TABLE IF NOT EXISTS completions (
   sudoku TEXT,
   time FLOAT
 );
+
+CREATE TABLE IF NOT EXISTS other_data (
+  sudoku_index INTEGER
+);
+
+INSERT INTO other_data (sudoku_index) VALUES (0)

@@ -1,2 +1,3 @@
 DROP TABLE IF EXISTS accounts;
 DROP TABLE IF EXISTS completions;
+DROP TABLE IF EXISTS other_data;

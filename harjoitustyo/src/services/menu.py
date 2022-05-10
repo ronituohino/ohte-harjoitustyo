@@ -13,7 +13,7 @@ class Menu:
         completed_sudokus: Lista suoritetuista sudokuista: ["nimi1", "nimi2"]
     """
 
-    def __init__(self, game, sudoku_folder_path):
+    def __init__(self, game, database, sudoku_folder_path):
         """Luokan konstruktori, hakee sudokutiedostot kansiosta ja suoritusdatan tietokannasta
 
         Args:
@@ -22,10 +22,19 @@ class Menu:
         """
 
         self.game = game
+        self.database = database
 
         self.sudokus = sudokus_in_folder(sudoku_folder_path)
-        self.selected_sudoku = 0
         self.sudoku_amount = len(self.sudokus)
+
+        last_menu_sudoku_index = database.get_menu_location()
+        if last_menu_sudoku_index == None:
+            last_menu_sudoku_index = 0
+
+        elif last_menu_sudoku_index >= self.sudoku_amount:
+            last_menu_sudoku_index = self.sudoku_amount - 1
+
+        self.selected_sudoku = last_menu_sudoku_index
 
         if self.game is not None and self.game.user is not None:
             self.completed_data = self.get_completed_data()
@@ -45,12 +54,14 @@ class Menu:
 
         if self.selected_sudoku > 0:
             self.selected_sudoku -= 1
+            self.database.set_menu_location(self.selected_sudoku)
 
     def move_right(self):
         """Siirtää valittua sudokua oikealle"""
 
         if self.selected_sudoku < self.sudoku_amount - 1:
             self.selected_sudoku += 1
+            self.database.set_menu_location(self.selected_sudoku)
 
     def open_sudoku(self):
         """Avaa valitun sudokun"""

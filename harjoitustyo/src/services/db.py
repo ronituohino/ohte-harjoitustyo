@@ -98,8 +98,7 @@ class Database:
         hash_value = generate_password_hash(password)
         try:
             sql = """INSERT INTO accounts (username, password) VALUES (:username, :password);"""
-            self.cur.execute(
-                sql, {"username": username, "password": hash_value})
+            self.cur.execute(sql, {"username": username, "password": hash_value})
             self.con.commit()
         except sqlite3.Error:
             return False
@@ -164,3 +163,25 @@ class Database:
         except sqlite3.Error:
             return False
         return True
+
+    def get_menu_location(self):
+        """Hakee päävalikon viimeksi valittuna olleen sudokun indeksin tietokannasta
+
+        Returns:
+            Nykyisen käyttäjän päävalikon viimeksi valittuna olleen sudokun indeksin
+        """
+
+        sql = """SELECT sudoku_index FROM other_data;"""
+        result = self.cur.execute(sql)
+        return result.fetchone()[0]
+
+    def set_menu_location(self, index):
+        """Päivittää päävalikon valittuna olleen sudokun
+
+        Args:
+            index: Päävalikon valitun Sudokun indeksi
+        """
+
+        sql = """UPDATE other_data SET sudoku_index=:sudoku_index;"""
+        self.cur.execute(sql, {"sudoku_index": index})
+        self.con.commit()

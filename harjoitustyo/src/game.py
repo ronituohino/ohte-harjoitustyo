@@ -37,7 +37,7 @@ class Game:
         self.sudoku_folder_path = sudoku_folder_path
         self.user = None
 
-        self.set_service(Menu(self, sudoku_folder_path))
+        self.set_service(Menu(self, self.database, sudoku_folder_path))
 
     def set_service(self, service):
         """Päivittää käytetyn palveluluokan tänne ja Canvas -luokalle
@@ -104,7 +104,7 @@ class Game:
     def open_menu(self):
         """Avaa päävalikon"""
 
-        self.set_service(Menu(self, self.sudoku_folder_path))
+        self.set_service(Menu(self, self.database, self.sudoku_folder_path))
 
     def open_login(self):
         """Avaa kirjautumisnäkymän"""

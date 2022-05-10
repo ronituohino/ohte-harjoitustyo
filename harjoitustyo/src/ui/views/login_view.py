@@ -25,8 +25,7 @@ class LoginView(View):
         self.login = login
 
         self._exit_button = Button(
-            canvas, (255, 0, 0), 0, 0, 100, 50, "X", ((
-                0, 0, 0), 3), login.open_menu
+            canvas, (255, 0, 0), 0, 0, 100, 50, "X", ((0, 0, 0), 3), login.open_menu
         )
 
         self._to_register_button = Button(
@@ -87,8 +86,11 @@ class LoginView(View):
             50,
             "Login",
             ((0, 0, 0), 3),
-            login.login,
+            self._attempt_login,
         )
+
+    def _attempt_login(self):
+        return self.login.login()
 
     def _set_username(self, username):
         self.login.username = username
@@ -134,12 +136,22 @@ class LoginView(View):
         )
         self._password_textbox.draw()
 
+        if self._login_button.return_val != None:
+            text(
+                self.canvas,
+                self._login_button.return_val["login"],
+                x_size / 2 - self._password_textbox.width / 2,
+                y_size * 0.45,
+                (200, 0, 0),
+                self.canvas.font_size * 0.5,
+            )
+
         self._login_button.update_size(
             self.canvas.lower_screen_dimension * 0.4,
             self.canvas.lower_screen_dimension * 0.1,
         )
         self._login_button.update_position(
-            x_size / 2 - self._login_button.width / 2, y_size * 0.45
+            x_size / 2 - self._login_button.width / 2, y_size * 0.5
         )
         self._login_button.draw()
 
@@ -148,7 +160,7 @@ class LoginView(View):
             self.canvas.lower_screen_dimension * 0.1,
         )
         self._to_register_button.update_position(
-            x_size / 2 - self._to_register_button.width / 2, y_size * 0.6
+            x_size / 2 - self._to_register_button.width / 2, y_size * 0.65
         )
         self._to_register_button.draw()
 

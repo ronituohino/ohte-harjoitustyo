@@ -57,7 +57,6 @@ class Login:
         errors = self.validate()
 
         if len(errors.keys()) > 0:
-            print(errors)
             return errors
 
         result = self.game.database.login(self.username, self.password)

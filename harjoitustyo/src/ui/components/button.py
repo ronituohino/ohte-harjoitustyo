@@ -28,6 +28,7 @@ class Button:
         self.outline = outline
         self.func = func
         self.args = args
+        self.return_val = None
 
         self.canvas = canvas
         canvas.add_button(self)
@@ -63,8 +64,7 @@ class Button:
             )
 
         pygame.draw.rect(
-            self.canvas.screen, self.color, (self.x,
-                                             self.y, self.width, self.height), 0
+            self.canvas.screen, self.color, (self.x, self.y, self.width, self.height), 0
         )
 
         if self.text != "":
@@ -83,4 +83,4 @@ class Button:
         return False
 
     def click(self) -> None:
-        self.func(*self.args)
+        self.return_val = self.func(*self.args)

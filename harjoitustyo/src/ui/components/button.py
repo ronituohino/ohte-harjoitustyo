@@ -33,6 +33,9 @@ class Button:
         self.canvas = canvas
         canvas.add_button(self)
 
+    def update_color(self, color) -> None:
+        self.color = color
+
     def update_text(self, text: str) -> None:
         self.text = text
 

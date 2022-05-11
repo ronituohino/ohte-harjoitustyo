@@ -39,9 +39,13 @@ class SudokuView(View):
         self._sudoku_buttons = [None] * (9 * 9)
         for i in range(9):
             for j in range(9):
+                if self.sudoku.immutable[i * 9 + j]:
+                    color = (100, 75, 75)
+                else:
+                    color = (100, 100, 100)
                 self._sudoku_buttons[i * 9 + j] = Button(
                     self.canvas,
-                    (100, 100, 100),
+                    color,
                     j * grid_size,
                     i * grid_size,
                     grid_size + 1,
@@ -57,7 +61,7 @@ class SudokuView(View):
         for i in range(9):
             self._number_buttons[i] = Button(
                 self.canvas,
-                (100, 100, 100),
+                (120, 120, 120),
                 10 * grid_size,
                 i * grid_size,
                 grid_size,
@@ -95,8 +99,7 @@ class SudokuView(View):
         x_size, y_size = self.canvas.screen_dimensions
         grid_size = self.canvas.lower_screen_dimension / 11
         x_offset = (x_size - self.canvas.lower_screen_dimension) / 2
-        y_offset = (y_size - self.canvas.lower_screen_dimension) / \
-            2 + grid_size
+        y_offset = (y_size - self.canvas.lower_screen_dimension) / 2 + grid_size
 
         self._draw_sudoku_buttons(grid_size, x_offset, y_offset)
         self._draw_sudoku_grid(grid_size, x_offset, y_offset)
@@ -145,9 +148,14 @@ class SudokuView(View):
     def _draw_number_selection(self, grid_size, x_offset, y_offset):
         # Draw number selection buttons
         for i in range(9):
+            if i == self.sudoku.selection_value - 1:
+                color = (100, 100, 150)
+            else:
+                color = (120, 120, 120)
+
             button = self._number_buttons[i]
-            button.update_position(
-                x_offset + 10 * grid_size, y_offset + i * grid_size)
+            button.update_position(x_offset + 10 * grid_size, y_offset + i * grid_size)
+            button.update_color(color)
             button.update_size(grid_size, grid_size)
             button.draw()
 

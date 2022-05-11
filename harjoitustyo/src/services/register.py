@@ -59,15 +59,12 @@ class Register:
         """
 
         errors = self.validate()
-
         if len(errors.keys()) > 0:
             return errors
-
         result = self.game.database.create_account(
             self.username, self.password)
         if not result:
             return {"register": "Username already taken"}
-
         self.game.user = result
         self.game.open_menu()
         return None

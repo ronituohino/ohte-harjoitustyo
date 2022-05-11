@@ -3,6 +3,24 @@ from ui.components.text import render, blit
 
 
 class Textbox:
+    """Syötekenttäluokka, jolla voimme ottaa näppäimistön syötettä lomakkeisiin
+
+    Attributes:
+        canvas: Canvas luokka
+        form: Syötekenttiä hallinnoiva lomake
+        name: Syötekentän nimi (virheidenkäsittelyyn)
+        color: Napin taustan väri
+        x: Napin vasemman ylänurkan x-koordinaatti
+        y: Napin vasemman ylänurkan y-koordinaatti
+        width: Napin leveys
+        height: Napin korkeus
+        max_chars: Syötteen maksimipituus
+        placeholder: Teksti joka näytetään jos kenttä on tyhjä
+        placeholder: Tyhjän syötekentän tekstin väri
+        outline: Napin rajaus ((r, g, b), paksuus)
+        update_func: Funktio jota kutsutaan kun syöte muuttuu
+    """
+
     def __init__(
         self,
         canvas: "Canvas",
@@ -19,6 +37,23 @@ class Textbox:
         outline: tuple,
         update_func,
     ):
+        """Luokan konstruktori
+
+        Args:
+            canvas: Canvas luokka
+            form: Syötekenttiä hallinnoiva lomake
+            name: Syötekentän nimi (virheidenkäsittelyyn)
+            color: Napin taustan väri
+            x: Napin vasemman ylänurkan x-koordinaatti
+            y: Napin vasemman ylänurkan y-koordinaatti
+            width: Napin leveys
+            height: Napin korkeus
+            max_chars: Syötteen maksimipituus
+            placeholder: Teksti joka näytetään jos kenttä on tyhjä
+            placeholder: Tyhjän syötekentän tekstin väri
+            outline: Napin rajaus ((r, g, b), paksuus)
+        """
+
         self.name = name
         self.color = color
         self.x = x
@@ -40,18 +75,38 @@ class Textbox:
         self.focus = False
 
     def is_over(self, pos: tuple) -> bool:
+        """Tarkistaa onko pos syötekentän päällä, käytetään hiirivalinnan yhteydessä
+
+        Args:
+            pos: hiiren sijainti
+
+        Returns:
+            True, jos pos on kentän päällä
+            False, jos ei
+        """
+
         if pos[0] > self.x and pos[0] < self.x + self.width:
             if pos[1] > self.y and pos[1] < self.y + self.height:
                 return True
         return False
 
     def set_focus(self):
+        """Asettaa syötekentän fokusoiduksi kentäksi"""
+
         self.focus = True
 
     def unset_focus(self):
+        """Asettaa syötekentän ei-fokusoiduksi kentäksi"""
+
         self.focus = False
 
     def write_char(self, char):
+        """Kirjoittaa symbolin syötekenttään
+
+        Args:
+            char: Kirjoitettava merkki
+        """
+
         if self.value:
             if not self.max_chars or len(self.value) < self.max_chars:
                 self.value += char
@@ -61,6 +116,8 @@ class Textbox:
             self.update()
 
     def delete_char(self):
+        """Poistaa viimeisen merkin syötekentästä"""
+
         if self.value:
             if len(self.value) > 1:
                 self.value = self.value[:-1]
@@ -69,21 +126,41 @@ class Textbox:
             self.update()
 
     def update(self):
+        """Kutsuu syötekentän päivitysfunktiota ja validoi lomakkeen"""
+
         self.update_func(self.value)
         self.form.validate()
 
     def set_errors(self, errors):
+        """Asettaa syötekentän virheviestit"""
+
         self.errors = errors
 
     def update_position(self, x: int, y: int) -> None:
+        """Päivittää syötekentän sijainnin
+
+        Args:
+            x: uusi x-koordinaatti
+            y: uusi y-koordinaatti
+        """
+
         self.x = x
         self.y = y
 
     def update_size(self, width: int, height: int) -> None:
+        """Päivittää syötekentän koon
+
+        Args:
+            width: uusi leveys
+            height: uusi korkeus
+        """
+
         self.width = width
         self.height = height
 
     def draw(self):
+        """Piirtää syötekentän"""
+
         if self.outline:
             self._draw_outline()
 
@@ -111,8 +188,7 @@ class Textbox:
 
     def _draw_background(self):
         pygame.draw.rect(
-            self.canvas.screen, self.color, (self.x,
-                                             self.y, self.width, self.height), 0
+            self.canvas.screen, self.color, (self.x, self.y, self.width, self.height), 0
         )
 
     def _draw_text(self):
@@ -125,8 +201,7 @@ class Textbox:
         )
 
     def _draw_placeholder(self):
-        ren = render(self.placeholder, self.placeholder_color,
-                     self.canvas.font_size)
+        ren = render(self.placeholder, self.placeholder_color, self.canvas.font_size)
         blit(
             self.canvas,
             self.x + self.width * 0.02,

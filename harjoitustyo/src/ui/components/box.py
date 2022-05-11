@@ -2,6 +2,15 @@ import pygame
 
 
 def box(canvas: "Canvas", color, x, y, width, height):
+    """Piirtää suorakulmion näytölle
+
+    Args:
+        color: Suorakulmion väri
+        x: Suorakulmion vasemman ylänurkan x-koordinaatti
+        y: Suorakulmion vasemman ylänurkan y-koordinaatti
+        width: Suorakulmion leveys
+        height: Suorakulmion korkeus
+    """
     pygame.draw.rect(
         canvas.screen,
         color,
@@ -15,6 +24,17 @@ def box(canvas: "Canvas", color, x, y, width, height):
 
 
 def box_outlined(canvas: "Canvas", color, x, y, width, height, outline):
+    """Piirtää rajatun suorakulmion näytölle
+
+    Args:
+        color: Suorakulmion väri
+        x: Suorakulmion vasemman ylänurkan x-koordinaatti
+        y: Suorakulmion vasemman ylänurkan y-koordinaatti
+        width: Suorakulmion leveys
+        height: Suorakulmion korkeus
+        outline: ((r, g, b): rajan väri, rajan paksuus, rajan ja tekstin etäisyys)
+    """
+
     pygame.draw.rect(
         canvas.screen,
         outline[0],

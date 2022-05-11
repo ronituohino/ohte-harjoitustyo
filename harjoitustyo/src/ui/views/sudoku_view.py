@@ -99,7 +99,8 @@ class SudokuView(View):
         x_size, y_size = self.canvas.screen_dimensions
         grid_size = self.canvas.lower_screen_dimension / 11
         x_offset = (x_size - self.canvas.lower_screen_dimension) / 2
-        y_offset = (y_size - self.canvas.lower_screen_dimension) / 2 + grid_size
+        y_offset = (y_size - self.canvas.lower_screen_dimension) / \
+            2 + grid_size
 
         self._draw_sudoku_buttons(grid_size, x_offset, y_offset)
         self._draw_sudoku_grid(grid_size, x_offset, y_offset)
@@ -154,7 +155,8 @@ class SudokuView(View):
                 color = (120, 120, 120)
 
             button = self._number_buttons[i]
-            button.update_position(x_offset + 10 * grid_size, y_offset + i * grid_size)
+            button.update_position(
+                x_offset + 10 * grid_size, y_offset + i * grid_size)
             button.update_color(color)
             button.update_size(grid_size, grid_size)
             button.draw()

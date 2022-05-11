@@ -5,6 +5,21 @@ from ui.components.text import render, blit
 
 
 class Button:
+    """Nappi, joka kutsuu sille annetun funktion argumenteilla
+
+    Attributes:
+        canvas: Canvas luokka
+        color: Napin taustan väri
+        x: Napin vasemman ylänurkan x-koordinaatti
+        y: Napin vasemman ylänurkan y-koordinaatti
+        width: Napin leveys
+        height: Napin korkeus
+        text: Napin teksti
+        outline: Napin rajaus ((r, g, b), paksuus)
+        func: Funktion viite
+        *args: Funktiolle annetut argumentit
+    """
+
     def __init__(
         self,
         canvas: "Canvas",
@@ -18,6 +33,21 @@ class Button:
         func,
         *args
     ) -> None:
+        """Luokan konstruktori
+
+        Args:
+            canvas: Canvas luokka
+            color: Napin taustan väri
+            x: Napin vasemman ylänurkan x-koordinaatti
+            y: Napin vasemman ylänurkan y-koordinaatti
+            width: Napin leveys
+            height: Napin korkeus
+            text: Napin teksti
+            outline: Napin rajaus ((r, g, b), paksuus)
+            func: Funktion viite
+            *args: Funktiolle annetut argumentit
+        """
+
         self.color = color
         self.x = x
         self.y = y
@@ -34,26 +64,66 @@ class Button:
         canvas.add_button(self)
 
     def update_color(self, color) -> None:
+        """Päivittää napin värin
+
+        Args:
+            color: uusi väri
+        """
+
         self.color = color
 
     def update_text(self, text: str) -> None:
+        """Päivittää napin tekstin
+
+        Args:
+            text: uusi teksti
+        """
+
         self.text = text
 
     def update_position(self, x: int, y: int) -> None:
+        """Päivittää napin sijainnin
+
+        Args:
+            x: uusi x-koordinaatti
+            y: uusi y-koordinaatti
+        """
+
         self.x = x
         self.y = y
 
     def update_size(self, width: int, height: int) -> None:
+        """Päivittää napin koon
+
+        Args:
+            width: uusi leveys
+            height: uusi korkeus
+        """
+
         self.width = width
         self.height = height
 
     def update_func(self, func) -> None:
+        """Päivittää napin funktion
+
+        Args:
+            func: uusi funktio
+        """
+
         self.func = func
 
     def update_args(self, *args) -> None:
+        """Päivittää napin funktion argumentit
+
+        Args:
+            *args: uuden argumentit
+        """
+
         self.args = args
 
     def draw(self) -> None:
+        """Piirtää napin"""
+
         if self.outline:
             self._draw_outline()
 

@@ -55,14 +55,11 @@ class Login:
         """
 
         errors = self.validate()
-
         if len(errors.keys()) > 0:
             return errors
-
         result = self.game.database.login(self.username, self.password)
         if not result:
             return {"login": "Username or password invalid"}
-
         self.game.user = result
         self.game.open_menu()
         return None

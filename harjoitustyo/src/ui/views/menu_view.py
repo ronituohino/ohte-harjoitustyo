@@ -130,7 +130,8 @@ class MenuView(View):
             (0, 0, 0),
             self.canvas.font_size,
         )
-        blit(self.canvas, x_size * 0.5 - ren.get_size()[0] / 2, y_size * 0.3, ren)
+        blit(self.canvas, x_size * 0.5 -
+             ren.get_size()[0] / 2, y_size * 0.3, ren)
 
     def _draw_sudokus(self, x_size, y_size):
         for i in range(-1, 2):
@@ -151,7 +152,8 @@ class MenuView(View):
                 ]
                 if len(completion_times) > 0:
                     self._draw_sudokus_completed_mark(x_center, y_size)
-                    self._draw_sudokus_time_mark(completion_times, x_center, y_size)
+                    self._draw_sudokus_time_mark(
+                        completion_times, x_center, y_size)
 
     def _render_sudoku_name(self, sudoku_name):
         return render(

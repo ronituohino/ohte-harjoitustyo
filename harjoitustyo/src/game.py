@@ -67,21 +67,15 @@ class Game:
             False, jos peli sammutetaan
         """
 
-        # Pygame event handling
         for event in self.event_queue.get():
-            # Quit events
             if event.type == pygame.QUIT:
                 return False
             if event.type == pygame.KEYDOWN:
-                # Quit with ESC key
                 if event.key == pygame.K_ESCAPE:
                     return False
-                # Text input
                 self.canvas.handle_text_input(event)
-            # Mouse events
             if event.type == pygame.MOUSEBUTTONDOWN:
                 self.canvas.handle_click(event)
-            # Window resize event
             if event.type == pygame.VIDEORESIZE:
                 self.canvas.update_screen_dimensions(event)
         return True

@@ -52,7 +52,6 @@ class Canvas:
         """
 
         # Service has changed, update view
-        # First remove old view's ui elements (buttons)
         self.buttons = []
         self.textboxes = []
         self.focused_textbox = None

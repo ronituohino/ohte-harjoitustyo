@@ -52,29 +52,38 @@ class Button:
 
     def draw(self) -> None:
         if self.outline:
-            pygame.draw.rect(
-                self.canvas.screen,
-                self.outline[0],
-                (
-                    self.x - self.outline[1],
-                    self.y - self.outline[1],
-                    self.width + self.outline[1] * 2,
-                    self.height + self.outline[1] * 2,
-                ),
-            )
+            self._draw_outline()
 
+        self._draw_background()
+
+        if self.text != "":
+            self._draw_text()
+
+    def _draw_outline(self):
+        pygame.draw.rect(
+            self.canvas.screen,
+            self.outline[0],
+            (
+                self.x - self.outline[1],
+                self.y - self.outline[1],
+                self.width + self.outline[1] * 2,
+                self.height + self.outline[1] * 2,
+            ),
+        )
+
+    def _draw_background(self):
         pygame.draw.rect(
             self.canvas.screen, self.color, (self.x, self.y, self.width, self.height), 0
         )
 
-        if self.text != "":
-            ren = render(self.text, (0, 0, 0), self.canvas.font_size)
-            blit(
-                self.canvas,
-                self.x + (self.width / 2 - ren.get_width() / 2),
-                self.y + (self.height / 2 - ren.get_height() / 2),
-                ren,
-            )
+    def _draw_text(self):
+        ren = render(self.text, (0, 0, 0), self.canvas.font_size)
+        blit(
+            self.canvas,
+            self.x + (self.width / 2 - ren.get_width() / 2),
+            self.y + (self.height / 2 - ren.get_height() / 2),
+            ren,
+        )
 
     def is_over(self, pos: tuple) -> bool:
         if pos[0] > self.x and pos[0] < self.x + self.width:

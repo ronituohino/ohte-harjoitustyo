@@ -38,7 +38,8 @@ class TestRegister(unittest.TestCase):
         self.register.password = "12345"
         self.register.password_again = "54321"
         self.assertEqual(
-            self.register.validate(), {"password_again": ["Passwords have to match"]}
+            self.register.validate(), {"password_again": [
+                "Passwords have to match"]}
         )
 
     def test_open_menu(self):

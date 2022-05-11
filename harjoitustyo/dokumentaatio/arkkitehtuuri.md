@@ -44,6 +44,8 @@ Jokainen näkymä saa sen konstruktorissa argumentikseen kyseisen palvelun, ja k
 
 Kaikki käyttöliittymäluokat periytyvät `View` luokasta.
 
+Käyttöliittymä on rakennettu siten, että peli-ikkunan kokoa voi muuttaa.
+
 ## Sudoku -sovelluksen luokkakaavio
 
 ```mermaid
@@ -96,6 +98,8 @@ Ohjelma tallentaa rekisteröityneitä käyttäjiä ja heidän suoritettujen Sudo
 Tietokannat ja niiden .sql skriptit sijaitsevat `/database` kansiossa.
 
 `src/services/db.py` toteuttaa tietokannan käsittelyyn liittyvän luokan `Database`.
+
+Käyttäjien salasanat tallennetaan `werkzeug.security` -kirjaston tarjoamien funktioiden muodossa (SHA256).
 
 ### Monta tietokantaa
 

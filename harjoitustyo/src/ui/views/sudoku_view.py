@@ -3,8 +3,7 @@ import pygame
 from ui.components.button import Button
 from ui.components.text import render, blit
 from ui.view import View
-from ui.components.box import box
-from services.sudoku import Sudoku
+from ui.components.box import box_outlined
 
 # Sudoku Game view
 
@@ -29,13 +28,19 @@ class SudokuView(View):
         self.sudoku = sudoku
 
         # Init UI elements
-        self._sudoku_buttons = [None] * (9 * 9)
-        x_size, y_size = canvas.screen_dimensions
+        x_size, y_size = self.canvas.screen_dimensions
         grid_size = self.canvas.lower_screen_dimension / 11
+
+        self._init_sudoku_buttons(grid_size)
+        self._init_number_buttons(grid_size)
+        self._init_exit_button(x_size)
+
+    def _init_sudoku_buttons(self, grid_size):
+        self._sudoku_buttons = [None] * (9 * 9)
         for i in range(9):
             for j in range(9):
                 self._sudoku_buttons[i * 9 + j] = Button(
-                    canvas,
+                    self.canvas,
                     (100, 100, 100),
                     j * grid_size,
                     i * grid_size,
@@ -47,10 +52,11 @@ class SudokuView(View):
                     (j, i),
                 )
 
+    def _init_number_buttons(self, grid_size):
         self._number_buttons = [None] * 9
         for i in range(9):
             self._number_buttons[i] = Button(
-                canvas,
+                self.canvas,
                 (100, 100, 100),
                 10 * grid_size,
                 i * grid_size,
@@ -62,8 +68,9 @@ class SudokuView(View):
                 i + 1,
             )
 
+    def _init_exit_button(self, x_size):
         self._exit_button = Button(
-            canvas,
+            self.canvas,
             (255, 0, 0),
             x_size - self.canvas.lower_screen_dimension * 0.1,
             0,
@@ -88,7 +95,8 @@ class SudokuView(View):
         x_size, y_size = self.canvas.screen_dimensions
         grid_size = self.canvas.lower_screen_dimension / 11
         x_offset = (x_size - self.canvas.lower_screen_dimension) / 2
-        y_offset = (y_size - self.canvas.lower_screen_dimension) / 2 + grid_size
+        y_offset = (y_size - self.canvas.lower_screen_dimension) / \
+            2 + grid_size
 
         self._draw_sudoku_buttons(grid_size, x_offset, y_offset)
         self._draw_sudoku_grid(grid_size, x_offset, y_offset)
@@ -138,7 +146,8 @@ class SudokuView(View):
         # Draw number selection buttons
         for i in range(9):
             button = self._number_buttons[i]
-            button.update_position(x_offset + 10 * grid_size, y_offset + i * grid_size)
+            button.update_position(
+                x_offset + 10 * grid_size, y_offset + i * grid_size)
             button.update_size(grid_size, grid_size)
             button.draw()
 
@@ -146,7 +155,7 @@ class SudokuView(View):
         if self.sudoku.solved:
             ren = render("Congratulations!", (0, 0, 0), self.canvas.font_size)
 
-            box(
+            box_outlined(
                 self.canvas,
                 (255, 255, 255),
                 x_size / 2 - ren.get_size()[0] / 2,

@@ -51,7 +51,6 @@ class Sudoku:
 
         self.grid[coords[1] * 9 + coords[0]] = self.selection_value
 
-        # Also check if the Sudoku is solved now
         if self.check_sudoku():
             self.completion_time = time.time() - self.time_start
 
@@ -62,10 +61,8 @@ class Sudoku:
                     account_id, self.sudoku_name, self.completion_time
                 )
 
-            # Update solved state
             self.solved = True
 
-    # Set the selection value
     def set_selection_value(self, value: int) -> None:
         """Asettaa selection_valuen arvon
 

@@ -41,4 +41,5 @@
 | 10.5. | 0.5      | Sudoku -pelinäkymän parantelua                                                        |
 | 10.5. | 1        | Yksikkö- ja integraatiotestejä                                                        |
 | 11.5. | 1        | Dokumentaation ylläpitoa                                                              |
-|  yht  | 36       |                                                                                       |
+| 11.5. | 1        | Sovelluksen koodin hiomista ja muuta viimeistelyä                                     |
+|  yht  | 37       |                                                                                       |

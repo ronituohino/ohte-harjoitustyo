@@ -1,6 +1,6 @@
 # Sudoku
 
-Sovelluksella pystyy pelamaan hyvin tunnettua Sudoku -peliä paikallisesti. Sovellus on luotu Pythonilla Poetry-ympäristössä, ja se käyttää pygame -kirjastoa käyttöliittymän toteutuksessa.
+Sovelluksella pystyy pelamaan hyvin tunnettua Sudoku -peliä paikallisesti. Sovellukseen pystyy luomaan käyttäjän jolloin se pitää kirjaa suoritetuista Sudokuista. Sovellus on luotu Pythonilla Poetry-ympäristössä, ja se käyttää pygame -kirjastoa käyttöliittymän toteutuksessa.
 
 Sovellus on toteutettu Python -versiolla `3.8` ja muilla Python -versioilla saattaa esiintyä ongelmia.
 
@@ -8,6 +8,7 @@ Tämä sovellus on kurssin [Ohjelmistotekniikka 2022](https://ohjelmistotekniikk
 
 ## Julkaisut
 
+- [Loppupalautus](https://github.com/ronituohino/ohte-harjoitustyo/releases/tag/loppupalautus)
 - [Viikko 6](https://github.com/ronituohino/ohte-harjoitustyo/releases/tag/viikko6)
 - [Viikko 5](https://github.com/ronituohino/ohte-harjoitustyo/releases/tag/viikko5)
 
@@ -18,6 +19,7 @@ Tämä sovellus on kurssin [Ohjelmistotekniikka 2022](https://ohjelmistotekniikk
 - [Työaikakirjanpito](./harjoitustyo/dokumentaatio/tyoaikakirjanpito.md)
 - [Changelog](./harjoitustyo/dokumentaatio/changelog.md)
 - [Käyttöohje](./harjoitustyo/dokumentaatio/kayttoohje.md)
+- [Testidokumentti](./harjoitustyo/dokumentaatio/testaus.md)
 
 ## Asennus
 

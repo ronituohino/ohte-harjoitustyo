@@ -98,7 +98,8 @@ class Database:
         hash_value = generate_password_hash(password)
         try:
             sql = """INSERT INTO accounts (username, password) VALUES (:username, :password);"""
-            self.cur.execute(sql, {"username": username, "password": hash_value})
+            self.cur.execute(
+                sql, {"username": username, "password": hash_value})
             self.con.commit()
         except sqlite3.Error:
             return False
@@ -121,14 +122,15 @@ class Database:
         account = result.fetchone()
         if not account:
             return False
-
         if check_password_hash(account[1], password):
-            return {
-                "id": account[0],
-                "username": username,
-            }
-
+            return self._user_details(account, username)
         return False
+
+    def _user_details(self, account, username):
+        return {
+            "id": account[0],
+            "username": username,
+        }
 
     def get_completed_data(self, account_id):
         """Hakee suoritettujen sudokuiden tiedot käyttäjällä

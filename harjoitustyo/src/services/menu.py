@@ -27,6 +27,13 @@ class Menu:
         self.sudokus = sudokus_in_folder(sudoku_folder_path)
         self.sudoku_amount = len(self.sudokus)
 
+        self.selected_sudoku = self._init_get_last_sudoku_index(database)
+
+        self.completed_data = []
+        self.completed_sudokus = []
+        self._init_completion_data()
+
+    def _init_get_last_sudoku_index(self, database):
         last_menu_sudoku_index = database.get_menu_location()
         if last_menu_sudoku_index is None:
             last_menu_sudoku_index = 0
@@ -34,14 +41,12 @@ class Menu:
         elif last_menu_sudoku_index >= self.sudoku_amount:
             last_menu_sudoku_index = self.sudoku_amount - 1
 
-        self.selected_sudoku = last_menu_sudoku_index
+        return last_menu_sudoku_index
 
+    def _init_completion_data(self):
         if self.game is not None and self.game.user is not None:
             self.completed_data = self.get_completed_data()
             self.completed_sudokus = [t[0] for t in self.completed_data]
-        else:
-            self.completed_data = []
-            self.completed_sudokus = []
 
     def get_completed_data(self):
         return self.game.database.get_completed_data(self.game.user["id"])

@@ -57,4 +57,5 @@ class TestLogin(unittest.TestCase):
     def test_login_username_taken(self):
         self.login.username = "username_that_is_not_in_database"
         self.login.password = "12345"
-        self.assertEqual(self.login.login(), {"login": "Username or password invalid"})
+        self.assertEqual(self.login.login(), {
+                         "login": "Username or password invalid"})

@@ -24,12 +24,33 @@ class RegisterView(View):
         self.canvas = canvas
         self.register = register
 
+        self._init_exit_button()
+        self._init_to_login_button()
+        self._register_form = Form(register.validate)
+        self._init_username_textbox()
+        self._init_password_textbox()
+        self._init_password_again_textbox()
+        self._register_form.attach_textbox(self._username_textbox)
+        self._register_form.attach_textbox(self._password_textbox)
+        self._register_form.attach_textbox(self._password_again_textbox)
+        self._init_register_button()
+
+    def _init_exit_button(self):
         self._exit_button = Button(
-            canvas, (255, 0, 0), 0, 0, 100, 50, "X", ((0, 0, 0), 3), register.open_menu
+            self.canvas,
+            (255, 0, 0),
+            0,
+            0,
+            100,
+            50,
+            "X",
+            ((0, 0, 0), 3),
+            self.register.open_menu,
         )
 
+    def _init_to_login_button(self):
         self._to_login_button = Button(
-            canvas,
+            self.canvas,
             (255, 0, 0),
             0,
             0,
@@ -37,13 +58,12 @@ class RegisterView(View):
             50,
             "Already have an account?",
             ((0, 0, 0), 3),
-            register.open_login,
+            self.register.open_login,
         )
 
-        self._register_form = Form(register.validate)
-
+    def _init_username_textbox(self):
         self._username_textbox = Textbox(
-            canvas,
+            self.canvas,
             self._register_form,
             "username",
             (245, 245, 245),
@@ -58,8 +78,9 @@ class RegisterView(View):
             self._set_username,
         )
 
+    def _init_password_textbox(self):
         self._password_textbox = Textbox(
-            canvas,
+            self.canvas,
             self._register_form,
             "password",
             (245, 245, 245),
@@ -74,8 +95,9 @@ class RegisterView(View):
             self._set_password,
         )
 
+    def _init_password_again_textbox(self):
         self._password_again_textbox = Textbox(
-            canvas,
+            self.canvas,
             self._register_form,
             "password_again",
             (245, 245, 245),
@@ -90,12 +112,9 @@ class RegisterView(View):
             self._set_password_again,
         )
 
-        self._register_form.attach_textbox(self._username_textbox)
-        self._register_form.attach_textbox(self._password_textbox)
-        self._register_form.attach_textbox(self._password_again_textbox)
-
+    def _init_register_button(self):
         self._register_button = Button(
-            canvas,
+            self.canvas,
             (0, 255, 0),
             0,
             600,
@@ -107,6 +126,7 @@ class RegisterView(View):
         )
 
     def _attempt_register(self):
+        self._register_form.validate()
         return self.register.register()
 
     def _set_username(self, username):
@@ -128,7 +148,18 @@ class RegisterView(View):
 
         x_size, y_size = self.canvas.screen_dimensions
 
-        # Draw registration form
+        self._draw_register_text(x_size, y_size)
+
+        self._draw_username_textbox(x_size, y_size)
+        self._draw_password_textbox(x_size, y_size)
+        self._draw_password_again_textbox(x_size, y_size)
+        self._draw_registration_error(x_size, y_size)
+        self._draw_register_button(x_size, y_size)
+        self._draw_to_login_button(x_size, y_size)
+
+        self._draw_exit_button(x_size)
+
+    def _draw_register_text(self, x_size, y_size):
         text(
             self.canvas,
             "Register",
@@ -138,6 +169,7 @@ class RegisterView(View):
             self.canvas.font_size,
         )
 
+    def _draw_username_textbox(self, x_size, y_size):
         self._username_textbox.update_size(
             self.canvas.lower_screen_dimension * 0.4,
             self.canvas.lower_screen_dimension * 0.1,
@@ -147,6 +179,7 @@ class RegisterView(View):
         )
         self._username_textbox.draw()
 
+    def _draw_password_textbox(self, x_size, y_size):
         self._password_textbox.update_size(
             self.canvas.lower_screen_dimension * 0.4,
             self.canvas.lower_screen_dimension * 0.1,
@@ -156,6 +189,7 @@ class RegisterView(View):
         )
         self._password_textbox.draw()
 
+    def _draw_password_again_textbox(self, x_size, y_size):
         self._password_again_textbox.update_size(
             self.canvas.lower_screen_dimension * 0.4,
             self.canvas.lower_screen_dimension * 0.1,
@@ -165,7 +199,11 @@ class RegisterView(View):
         )
         self._password_again_textbox.draw()
 
-        if self._register_button.return_val != None:
+    def _draw_registration_error(self, x_size, y_size):
+        if (
+            self._register_button.return_val != None
+            and "register" in self._register_button.return_val
+        ):
             text(
                 self.canvas,
                 self._register_button.return_val["register"],
@@ -175,6 +213,7 @@ class RegisterView(View):
                 self.canvas.font_size * 0.5,
             )
 
+    def _draw_register_button(self, x_size, y_size):
         self._register_button.update_size(
             self.canvas.lower_screen_dimension * 0.4,
             self.canvas.lower_screen_dimension * 0.1,
@@ -184,6 +223,7 @@ class RegisterView(View):
         )
         self._register_button.draw()
 
+    def _draw_to_login_button(self, x_size, y_size):
         self._to_login_button.update_size(
             self.canvas.lower_screen_dimension * 0.7,
             self.canvas.lower_screen_dimension * 0.1,
@@ -193,7 +233,7 @@ class RegisterView(View):
         )
         self._to_login_button.draw()
 
-        # Draw exit button
+    def _draw_exit_button(self, x_size):
         self._exit_button.update_size(
             self.canvas.lower_screen_dimension * 0.1,
             self.canvas.lower_screen_dimension * 0.1,

@@ -84,52 +84,61 @@ class Textbox:
         self.height = height
 
     def draw(self):
-        # Outline
         if self.outline:
-            pygame.draw.rect(
-                self.canvas.screen,
-                self.outline[0],
-                (
-                    self.x - self.outline[1],
-                    self.y - self.outline[1],
-                    self.width + self.outline[1] * 2,
-                    self.height + self.outline[1] * 2,
-                ),
-            )
+            self._draw_outline()
 
-        # Main rect
+        self._draw_background()
+
+        if self.value:
+            self._draw_text()
+        else:
+            self._draw_placeholder()
+
+        if self.errors and len(self.errors) > 0:
+            self._draw_error_message()
+
+    def _draw_outline(self):
+        pygame.draw.rect(
+            self.canvas.screen,
+            self.outline[0],
+            (
+                self.x - self.outline[1],
+                self.y - self.outline[1],
+                self.width + self.outline[1] * 2,
+                self.height + self.outline[1] * 2,
+            ),
+        )
+
+    def _draw_background(self):
         pygame.draw.rect(
             self.canvas.screen, self.color, (self.x,
                                              self.y, self.width, self.height), 0
         )
 
-        # Text in rect (value / placeholder)
-        if self.value:
-            ren = render(self.value, (0, 0, 0), self.canvas.font_size)
-            blit(
-                self.canvas,
-                self.x + self.width * 0.02,
-                self.y + (self.height / 2 - ren.get_height() / 2),
-                ren,
-            )
-        else:
-            ren = render(
-                self.placeholder, self.placeholder_color, self.canvas.font_size
-            )
-            blit(
-                self.canvas,
-                self.x + self.width * 0.02,
-                self.y + (self.height / 2 - ren.get_height() / 2),
-                ren,
-            )
+    def _draw_text(self):
+        ren = render(self.value, (0, 0, 0), self.canvas.font_size)
+        blit(
+            self.canvas,
+            self.x + self.width * 0.02,
+            self.y + (self.height / 2 - ren.get_height() / 2),
+            ren,
+        )
 
-        # Error message
-        if self.errors and len(self.errors) > 0:
-            ren = render(self.errors[0], (200, 0, 0),
-                         self.canvas.font_size * 0.5)
-            blit(
-                self.canvas,
-                self.x,
-                self.y + self.height + ren.get_height() / 2,
-                ren,
-            )
+    def _draw_placeholder(self):
+        ren = render(self.placeholder, self.placeholder_color,
+                     self.canvas.font_size)
+        blit(
+            self.canvas,
+            self.x + self.width * 0.02,
+            self.y + (self.height / 2 - ren.get_height() / 2),
+            ren,
+        )
+
+    def _draw_error_message(self):
+        ren = render(self.errors[0], (200, 0, 0), self.canvas.font_size * 0.5)
+        blit(
+            self.canvas,
+            self.x,
+            self.y + self.height + ren.get_height() / 2,
+            ren,
+        )

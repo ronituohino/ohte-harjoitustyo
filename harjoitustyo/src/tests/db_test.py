@@ -22,7 +22,8 @@ class TestDatabase(unittest.TestCase):
     def test_create_completed_data(self):
         self.db.create_account("roni", "12345")
         self.db.add_completed(1, "test1.sudoku", 123)
-        self.assertEqual(self.db.get_completed_data(1), [("test1.sudoku", 123.0)])
+        self.assertEqual(self.db.get_completed_data(1),
+                         [("test1.sudoku", 123.0)])
 
     def test_set_menu_location(self):
         self.db.set_menu_location(2)

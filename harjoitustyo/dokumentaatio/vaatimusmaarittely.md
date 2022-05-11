@@ -1,20 +1,27 @@
-# Vaarimusmäärittely
+# Vaatimusmäärittely
 
 ## Sovelluksen tarkoitus
 
-Sovellukella käyttäjä pystyy pelamaan tunnettua Sudoku -peliä tietokoneellaan. Sovellus pitää kirjaa käyttäjän ratkaistuista sudokuista ja käyttäjän tilastoista.
+Sovellukella käyttäjä pystyy pelamaan tunnettua Sudoku -peliä tietokoneellaan. Sovellus pitää kirjaa kirjautuneen käyttäjän ratkaistuista sudokuista ja niiden suoritusajoista.
 
 ## Käyttäjät
 
-Alkuvaiheessa sovelluksella on kaksi käyttäjäroolia eli _vieraileva_ ja _normaali_ käyttäjä. Vieraileva käyttäjä pystyy pelaamaan Sudokua, mutta hänen tilastojaan ei tallennetta. Myöhemmin sovellukseen saatetaan lisätä suurempien oikeuksien omaava _pääkäyttäjä_.
+Sovelluksella on kaksi käyttäjäroolia eli _vieraileva_ ja _normaali_ käyttäjä. Vieraileva käyttäjä pystyy pelaamaan Sudokua, mutta hänen Sudokujen suoritustietoja ei tallennetta.
 
 ## Sudokut
 
-Alkuvaiheessa sovelluksella on ainoastaan ennalta määritellyt lokaalit sudokut, ja niitä voi luoda lisäämällä sudoku -määrittelytiedostoja tiettyyn kansioon. Myöhemmin sovellukseen saatetaan lisätä graafisia työkaluja sudokujen luomiseen. Myöhemmin sovellukseen saatetaan myös lisätä verkossa oleva tietokanta, josta muiden luomia sudokuja pystyy ratkaisemaan.
+Sovelluksella on `sudokus/` kansiossa määritellyt lokaalit sudokut, ja niitä voi luoda lisää millä tahansa tekstieditorilla.
 
 ## Käyttöliittymäluonnos
 
-Sovellus koostuu alustavasti neljästä näkymästä. Myöhemmin saatetaan lisätä asetusnäkymä, erillinen tilastonäkymä, tulostaulu, Sudoku -työkalu, sekä pääkäyttäjän työkalut.  
+Sovellus koostuu alustavasti neljästä näkymästä:
+
+- Päävalikko
+- Sudoku pelinäkymä
+- Kirjautumislomake
+- Rekisteröitymislomake
+
+Sovelluksen kehityksen alussa tehty suunnitelma käyttöliittymästä
 ![Luonnos](./kuvat/luonnos.jpg)
 
 ## Perusversion tarjoama toiminnallisuus
@@ -41,7 +48,7 @@ Sovellus koostuu alustavasti neljästä näkymästä. Myöhemmin saatetaan lisä
 
 ## Jatkokehitysideoita
 
-Jos aikaa on vielä kätettävissä, perusversiota voidaan laajentaa seuraavilla ominaisuuksilla:
+Perusversiota voidaan mahdollisesti laajentaa seuraavilla ominaisuuksilla:
 
 - Erillinen tilastonäkymä
   - Suoritettujen Sudokujen määrä

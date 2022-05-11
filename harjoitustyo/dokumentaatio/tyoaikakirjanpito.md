@@ -36,4 +36,9 @@
 | 2.5.  | 1.5      | [arkkitehtuuri.md](arkkitehtuuri.md) päivitys                                         |
 | 2.5.  | 0.5      | [kayttoohje.md](kayttoohje.md)                                                        |
 | 2.5.  | 0.5      | Projektin säätämistä, tiedostojen hienosäätöä, nimeaämistä yms.                       |
-|  yht  | 32.5     |                                                                                       |
+| 10.5. | 0.5      | Loput virheviestit lomakkeisiin                                                       |
+| 10.5. | 0.5      | Viimeisimmän valitun Sudokun tallennus tietokantaan                                   |
+| 10.5. | 0.5      | Sudoku -pelinäkymän parantelua                                                        |
+| 10.5. | 1        | Yksikkö- ja integraatiotestejä                                                        |
+| 11.5. | 1        | Dokumentaation ylläpitoa                                                              |
+|  yht  | 36       |                                                                                       |

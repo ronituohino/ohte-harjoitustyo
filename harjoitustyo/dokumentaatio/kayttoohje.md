@@ -1,10 +1,6 @@
 # Käyttöohje
 
-Lataa projektin viimeisin [release](https://github.com/ronituohino/ohte-harjoitustyo/releases/tag/viikko6).
-
-## Konfigurointi
-
-**tulossa**
+Lataa projektin viimeisin [release](https://github.com/ronituohino/ohte-harjoitustyo/releases/tag/loppupalautus).
 
 ## Vaatimukset
 
@@ -36,7 +32,7 @@ Voit valita pelattavan Sudokun klikkaamlla ruudun alhaalla olevia näppäimiä `
 Peliin avautuu Sudoku -ikkuna ja palkki valittavia numeroita.
 Voit sijoittaa numeron ruudukkoon ensiksi klikkaamalla oikealta palkista haluamasi numeron, ja sitten klikkaamalla ruudukkoa.
 
-Tarkoituksena on täyttää Sudoku -ruudukko siten, että jokaisessaa 3x3 ruudukossa ja vaaka- ja pystyrivissä on kaikki numerot välillä 1-9 tasan yhden kerran. Jos Sudoku on ratkaistu oikein, alas ilmestyy teksti "Congratulations".
+Tarkoituksena on täyttää Sudoku -ruudukko siten, että jokaisessaa 3x3 ruudukossa ja vaaka- ja pystyrivissä on kaikki numerot välillä 1-9 tasan yhden kerran. Jos Sudoku on ratkaistu oikein, ruudun keskelle ilmestyy teksti "Congratulations".
 
 ## Käyttäjän luominen
 
@@ -44,7 +40,9 @@ Voit luoda käyttäjän peliin jolloin ratkaistut sudokut, ja niihin käytetty a
 
 Käyttäjän pystyy luomaan päävalikosta painamalla ensin nappia `Login`, ja sen jälkeen nappia `New user?`. Kenttiin pystyy kirjoittamaan painamalla niitä ensin hiirellä ja sen jälkeen naputtelemalla näppäimistöllä.
 
-Paina nappia `Register`, kun kentät ovat täynnä. Jos mitään ei tapahdu, käyttäjänimesi on jo käytössä.
+Paina nappia `Register`, kun kentät ovat täynnä.
+
+Lomakkeet näyttävät annetuissa tiedoissa mahdollisia virheitä tummanpunaisella tekstillä syötekenttien alla.
 
 ## Kirjautuminen
 

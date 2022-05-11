@@ -44,3 +44,15 @@ Suoritettujen sudokujen esitys päävalikkoon sekä kattavan dokumentaation tuot
 - Lisätty docstringit lähestulkoon kaikkiin luokkiin ja funktioihin
 - Parannettu [arkkitehtuurikuvausta](arkkitehtuuri.md)
 - Lisätty [käyttöohje](kayttoohje.md)
+
+## Loppupalautus
+
+Loppukosketuksia sovelluksen toimivuuteen ja ulkonäköön
+
+- Lisätty "Käyttäjänimi tai salasana väärin" ja "Käyttäjänimi käytössä" -virheviestit kirjautumis- ja rekisteröitymislomakkeisiin
+- Lisätty viimeisimmän päävalikossa valittuna olevan sudokun tallennus tietokantaan.
+  - Kun päävalikko avataan uudestaan, se avautuu siihen mihin se viimeksi jäi
+- Parannettu Sudoku -pelinäkymää
+- Lisätty yksikkö ja integraatiotestejä
+- Lisätty [testausdokumentti](testaus.md)
+- Päivitetty dokumentaatio

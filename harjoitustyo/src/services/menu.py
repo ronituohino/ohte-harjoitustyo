@@ -66,7 +66,8 @@ class Menu:
     def open_sudoku(self):
         """Avaa valitun sudokun"""
 
-        self.game.open_sudoku(self.sudokus[self.selected_sudoku])
+        if len(self.sudokus) > 0 and self.selected_sudoku < len(self.sudokus):
+            self.game.open_sudoku(self.sudokus[self.selected_sudoku])
 
     def open_login(self):
         """Avaa kirjautumisnäkymän"""
